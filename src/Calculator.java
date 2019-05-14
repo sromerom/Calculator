@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Policy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +36,42 @@ public class Calculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String opcioElegida = tipusOp.getSelectedItem().toString();
                 switch (opcioElegida) {
+                    case "bàsic":
+                        butIg.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent actionEvent) {
+
+                                String operacio = pantallaOp.getText();
+                                String regEx = "[\\+\\-\\*\\/]";
+                                String split[] = operacio.split(regEx);
+                                int[] numbers = new int[split.length];
+                                List<String> signes = new ArrayList<>();
+
+                                for (int i = 0; i < split.length; i++) {
+                                    numbers[i] = Integer.parseInt(split[i]);
+                                }
+
+                                for (int i = 0; i < operacio.length(); i++) {
+                                    char actual = operacio.charAt(i);
+                                    String actualString = Character.toString(actual);
+                                    if (actual == 42 || actual == 43 || actual == 45 || actual == 47) {
+                                        signes.add(actualString);
+                                    }
+                                }
+
+                                System.out.println("Numbers: " + Arrays.toString(numbers));
+                                System.out.println("Signes: " + signes);
+
+                                int resultat = calcula(numbers, signes);
+
+                                String resultatString = String.valueOf(resultat);
+                                pantallaRes.setText(resultatString);
+                                System.out.println("Resultat: " + resultat);
+
+
+                            }
+                        });
+                        break;
                     case "Polinomi":
 
                         break;
@@ -63,40 +100,6 @@ public class Calculator extends JFrame {
                     default:
                         // code block
                 }
-            }
-        });
-        butIg.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-                String operacio = pantallaOp.getText();
-                String regEx = "[\\+\\-\\*\\/]";
-                String split[] = operacio.split(regEx);
-                int[] numbers = new int[split.length];
-                List<String> signes = new ArrayList<>();
-
-                for (int i = 0; i < split.length; i++) {
-                    numbers[i] = Integer.parseInt(split[i]);
-                }
-
-                for (int i = 0; i < operacio.length(); i++) {
-                    char actual = operacio.charAt(i);
-                    String actualString = Character.toString(actual);
-                    if (actual == 42 || actual == 43 || actual == 45 || actual == 47) {
-                        signes.add(actualString);
-                    }
-                }
-
-                System.out.println("Numbers: " + Arrays.toString(numbers));
-                System.out.println("Signes: " + signes);
-
-                int resultat = calcula(numbers, signes);
-
-                String resultatString = String.valueOf(resultat);
-                pantallaRes.setText(resultatString);
-                System.out.println("Resultat: " + resultat);
-
-
             }
         });
     }
