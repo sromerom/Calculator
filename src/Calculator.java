@@ -10,12 +10,65 @@ public class Calculator extends JFrame {
     private JTextField pantallaOp;
     private JTextField pantallaRes;
     private JButton butIg;
+    private JComboBox tipusOp;
+    private JComboBox base;
 
     Calculator() {
         this.setContentPane(total);
+        tipusOp.addItem("Polinomi");
+        tipusOp.addItem("Romans");
+        tipusOp.addItem("RPN");
+        tipusOp.addItem("Vectors");
+        tipusOp.addItem("Matrius");
+        tipusOp.addItem("Fraccions");
+        tipusOp.addItem("Canvi unitats");
+        tipusOp.addItem("Canvi diners");
+
+        base.addItem("Base 2");
+        base.addItem("Base 8");
+        base.addItem("Base 16");
+
+
+        // Accion a realizar cuando el JComboBox cambia de item seleccionado.
+        tipusOp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String opcioElegida = tipusOp.getSelectedItem().toString();
+                switch (opcioElegida) {
+                    case "Polinomi":
+
+                        break;
+                    case "Romans":
+
+                        break;
+                    case "RPN":
+
+                        break;
+                    case "Vectors":
+
+                        break;
+                    case "Matrius":
+
+                        break;
+                    case "Fraccions":
+
+                        break;
+
+                    case "Canvi unitats":
+
+                        break;
+                    case "Canvi diners":
+                        System.out.println();
+                        break;
+                    default:
+                        // code block
+                }
+            }
+        });
         butIg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
                 String operacio = pantallaOp.getText();
                 String regEx = "[\\+\\-\\*\\/]";
                 String split[] = operacio.split(regEx);
@@ -90,7 +143,7 @@ public class Calculator extends JFrame {
                         resultat = numbers[0] / numbers[1];
                         break;
                     default:
-                        // code block
+                        System.out.println("error");
                 }
 
                 recorrNumbers += 1;
@@ -109,7 +162,7 @@ public class Calculator extends JFrame {
                         resultat = resultat / numbers[recorrNumbers];
                         break;
                     default:
-                        // code block
+                        System.out.println("error");
                 }
 
             }
