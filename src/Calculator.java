@@ -1,13 +1,21 @@
+import Keypads.KeypadBase;
+import Keypads.KeypadRomans;
+import Keypads.KeypadNormal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.Policy;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Calculator extends JFrame {
+
+    //Keypads a carregar
+    KeypadNormal kn;
+    KeypadRomans kr;
+    KeypadBase kb;
+
+    //JPanel principals
     private JPanel total;
     private JPanel pantalla;
     private JPanel keypad;
@@ -16,13 +24,11 @@ public class Calculator extends JFrame {
     private JTextField pantallaRes;
     private JComboBox tipusOp;
     private JComboBox tipusBase;
-    panel0 p1;
-    panel2 p2;
     private CardLayout cl;
 
-    final static String PANTALLA1 = "Pantalla 1";
-    final static String PANTALLA2 = "Pantalla 2";
-    final static String PANTALLA3 = "Pantalla 3";
+    final static String KEYPAD_NORMAL = "Keypad per defecte";
+    final static String KEYPAD_ROMANS = "Keypad per operacions amb numeros romans";
+    final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
 
     Calculator() {
         this.setContentPane(total);
@@ -39,81 +45,47 @@ public class Calculator extends JFrame {
         tipusBase.addItem("Base 8");
         tipusBase.addItem("Base 16");
 
-
-
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
         tipusOp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcioElegida = tipusOp.getSelectedItem().toString();
+                System.out.println(opcioElegida);
                 switch (opcioElegida) {
-                    case "bàsic":
-
-                        /*
-                        butIg.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent actionEvent) {
-
-                                String operacio = pantallaOp.getText();
-                                String regEx = "[\\+\\-\\*\\/]";
-                                String split[] = operacio.split(regEx);
-                                int[] numbers = new int[split.length];
-                                List<String> signes = new ArrayList<>();
-
-                                for (int i = 0; i < split.length; i++) {
-                                    numbers[i] = Integer.parseInt(split[i]);
-                                }
-
-                                for (int i = 0; i < operacio.length(); i++) {
-                                    char actual = operacio.charAt(i);
-                                    String actualString = Character.toString(actual);
-                                    if (actual == 42 || actual == 43 || actual == 45 || actual == 47) {
-                                        signes.add(actualString);
-                                    }
-                                }
-
-                                System.out.println("Numbers: " + Arrays.toString(numbers));
-                                System.out.println("Signes: " + signes);
-
-                                int resultat = calcula(numbers, signes);
-
-                                String resultatString = String.valueOf(resultat);
-                                pantallaRes.setText(resultatString);
-                                System.out.println("Resultat: " + resultat);
-
-
-                            }
-
-                        });
-                        */
-
+                    case "Tipus operacio":
                         break;
                     case "Polinomi":
-                        cl.show(keypad, PANTALLA1);
+                        cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("Card 1");
                         break;
                     case "Romans":
-                        cl.show(keypad, PANTALLA2);
+                        cl.show(keypad, KEYPAD_ROMANS);
                         System.out.println("Card 2");
                         break;
                     case "RPN":
-
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
                     case "Vectors":
-
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
                     case "Matrius":
-
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
                     case "Fraccions":
-
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
 
                     case "Canvi unitats":
-
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
                     case "Canvi diners":
-                        System.out.println();
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("Card 1");
                         break;
                     default:
                         // code block
@@ -121,15 +93,44 @@ public class Calculator extends JFrame {
             }
         });
 
+        tipusBase.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String opcioElegida = tipusBase.getSelectedItem().toString();
+                switch (opcioElegida) {
+                    case "Tipus operacio":
+                        break;
+                    case "Base 2":
+                        cl.show(keypad, KEYPAD_ROMANS);
+                        System.out.println("Card 1");
+                        break;
+                    case "Base 8":
+                        cl.show(keypad, KEYPAD_ROMANS);
+                        System.out.println("Card 1");
+                        break;
+                    case "Base 16":
+                        cl.show(keypad, KEYPAD_ROMANS);
+                        System.out.println("Card 1");
+                        break;
+                    default:
+
+                }
+            }
+        });
+
+
         keypad = new JPanel();
-        p1 = new panel0();
-        p2 = new panel2();
+        kn = new KeypadNormal(pantallaRes);
+        kr = new KeypadRomans();
+        //kb = new KeypadBase();
 
         total.add(keypad, BorderLayout.CENTER);
         cl = new CardLayout(0, 0);
         keypad.setLayout(cl);
-        keypad.add(p1.getFf(), PANTALLA1);
-        keypad.add(p2.getFff(), PANTALLA2);
+        keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
+        keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
+
+
     }
 
     public static int calcula(int[] numbers, List<String> signes) {
