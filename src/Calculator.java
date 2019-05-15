@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.Policy;
@@ -8,11 +9,20 @@ import java.util.List;
 
 public class Calculator extends JFrame {
     private JPanel total;
+    private JPanel pantalla;
+    private JPanel keypad;
+    private JPanel opcions;
     private JTextField pantallaOp;
     private JTextField pantallaRes;
-    private JButton butIg;
     private JComboBox tipusOp;
-    private JComboBox base;
+    private JComboBox tipusBase;
+    panel0 p1;
+    panel2 p2;
+    private CardLayout cl;
+
+    final static String PANTALLA1 = "Pantalla 1";
+    final static String PANTALLA2 = "Pantalla 2";
+    final static String PANTALLA3 = "Pantalla 3";
 
     Calculator() {
         this.setContentPane(total);
@@ -25,9 +35,10 @@ public class Calculator extends JFrame {
         tipusOp.addItem("Canvi unitats");
         tipusOp.addItem("Canvi diners");
 
-        base.addItem("Base 2");
-        base.addItem("Base 8");
-        base.addItem("Base 16");
+        tipusBase.addItem("Base 2");
+        tipusBase.addItem("Base 8");
+        tipusBase.addItem("Base 16");
+
 
 
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
@@ -37,6 +48,8 @@ public class Calculator extends JFrame {
                 String opcioElegida = tipusOp.getSelectedItem().toString();
                 switch (opcioElegida) {
                     case "bàsic":
+
+                        /*
                         butIg.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent actionEvent) {
@@ -70,13 +83,18 @@ public class Calculator extends JFrame {
 
 
                             }
+
                         });
+                        */
+
                         break;
                     case "Polinomi":
-
+                        cl.show(keypad, PANTALLA1);
+                        System.out.println("Card 1");
                         break;
                     case "Romans":
-
+                        cl.show(keypad, PANTALLA2);
+                        System.out.println("Card 2");
                         break;
                     case "RPN":
 
@@ -102,6 +120,16 @@ public class Calculator extends JFrame {
                 }
             }
         });
+
+        keypad = new JPanel();
+        p1 = new panel0();
+        p2 = new panel2();
+
+        total.add(keypad, BorderLayout.CENTER);
+        cl = new CardLayout(0, 0);
+        keypad.setLayout(cl);
+        keypad.add(p1.getFf(), PANTALLA1);
+        keypad.add(p2.getFff(), PANTALLA2);
     }
 
     public static int calcula(int[] numbers, List<String> signes) {
@@ -175,6 +203,14 @@ public class Calculator extends JFrame {
 
         }
         return resultat;
+    }
+
+    public JPanel getTotal() {
+        return total;
+    }
+
+    public void setTotal(JPanel total) {
+        this.total = total;
     }
 }
 
