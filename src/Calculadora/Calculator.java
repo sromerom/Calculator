@@ -1,3 +1,5 @@
+package Calculadora;
+
 import Calculs.Calcul;
 import Keypads.KeypadBase;
 import Keypads.KeypadRomans;
@@ -15,7 +17,6 @@ public class Calculator extends JFrame {
     KeypadNormal kn;
     KeypadRomans kr;
     KeypadBase kb;
-
     //JPanel principals
     private JPanel total;
     private JPanel pantalla;
@@ -28,24 +29,44 @@ public class Calculator extends JFrame {
     private CardLayout cl;
     private String opcioElegida;
 
+    private enum tipusOperacions {
+        POLINOMI,
+        ROMANS,
+        RPN,
+        VECTORS,
+        MATRIUS,
+        FRACCIONS,
+        CANVI_UNITATS,
+        CANVI_MONETARI
+    }
+
+    private enum enumTipusBase {
+        DECIMAL,
+        OCTAL,
+        HEXACIMAL,
+        BINARI
+    }
+
     final static String KEYPAD_NORMAL = "Keypad per defecte";
     final static String KEYPAD_ROMANS = "Keypad per operacions amb numeros romans";
     final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
 
-    Calculator() {
-        this.setContentPane(total);
-        tipusOp.addItem("Polinomi");
-        tipusOp.addItem("Romans");
-        tipusOp.addItem("RPN");
-        tipusOp.addItem("Vectors");
-        tipusOp.addItem("Matrius");
-        tipusOp.addItem("Fraccions");
-        tipusOp.addItem("Canvi unitats");
-        tipusOp.addItem("Canvi diners");
+    public Calculator() {
 
-        tipusBase.addItem("Base 2");
-        tipusBase.addItem("Base 8");
-        tipusBase.addItem("Base 16");
+        tipusOp.addItem(tipusOperacions.POLINOMI);
+        tipusOp.addItem(tipusOperacions.ROMANS);
+        tipusOp.addItem(tipusOperacions.RPN);
+        tipusOp.addItem(tipusOperacions.VECTORS);
+        tipusOp.addItem(tipusOperacions.MATRIUS);
+        tipusOp.addItem(tipusOperacions.FRACCIONS);
+        tipusOp.addItem(tipusOperacions.CANVI_UNITATS);
+        tipusOp.addItem(tipusOperacions.CANVI_MONETARI);
+
+        tipusBase.addItem(enumTipusBase.DECIMAL);
+        tipusBase.addItem(enumTipusBase.OCTAL);
+        tipusBase.addItem(enumTipusBase.HEXACIMAL);
+        tipusBase.addItem(enumTipusBase.BINARI);
+
 
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
         tipusOp.addActionListener(new ActionListener() {
@@ -56,38 +77,38 @@ public class Calculator extends JFrame {
                 switch (opcioElegida) {
                     case "Tipus operacio":
                         break;
-                    case "Polinomi":
+                    case "POLINOMI":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("POLINOMI");
                         break;
-                    case "Romans":
+                    case "ROMANS":
                         cl.show(keypad, KEYPAD_ROMANS);
-                        System.out.println("Card 2");
+                        System.out.println("ROMANS");
                         break;
                     case "RPN":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("RPN");
                         break;
-                    case "Vectors":
+                    case "VECTORS":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("VECTORS");
                         break;
-                    case "Matrius":
+                    case "MATRIUS":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("MATRIUS");
                         break;
-                    case "Fraccions":
+                    case "FRACCIONS":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("FRACCIONS");
                         break;
 
-                    case "Canvi unitats":
+                    case "CANVI_UNITATS":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("CANVI UNITATS");
                         break;
-                    case "Canvi diners":
+                    case "CANVI_MONETARI":
                         cl.show(keypad, KEYPAD_NORMAL);
-                        System.out.println("Card 1");
+                        System.out.println("CANVI MONETARI");
                         break;
                     default:
                         // code block
@@ -98,8 +119,8 @@ public class Calculator extends JFrame {
         tipusBase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String opcioElegida = tipusBase.getSelectedItem().toString();
-                switch (opcioElegida) {
+                String opcioElegidaBase = tipusBase.getSelectedItem().toString();
+                switch (opcioElegidaBase) {
                     case "Tipus operacio":
                         break;
                     case "Base 2":
@@ -120,10 +141,8 @@ public class Calculator extends JFrame {
             }
         });
 
-
-
         keypad = new JPanel();
-        kn = new KeypadNormal(pantallaOp, pantallaRes);
+        kn = new KeypadNormal(pantallaOp, pantallaRes, opcioElegida);
         kr = new KeypadRomans();
         //kb = new KeypadBase();
 
@@ -134,6 +153,7 @@ public class Calculator extends JFrame {
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
 
     }
+
 
     public JPanel getTotal() {
         return total;

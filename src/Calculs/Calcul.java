@@ -11,15 +11,32 @@ public class Calcul {
     private List<String> signes;
     private String resultatString = "";
 
+    public String getResultatString() {
+        return resultatString;
+    }
+
+    public void setResultatString(String resultatString) {
+        this.resultatString = resultatString;
+    }
+
+    private enum tipusCalcul {
+        NORMAL,
+        ROMA,
+        POLINOMIS
+
+    }
+    String actualCalcul = "";
+
     public Calcul() {
 
     }
 
-    public Calcul(String operacio) {
+    public Calcul(String operacio, String tipusCalcul) {
         String regEx = "[\\+\\-\\*\\/]";
         String split[] = operacio.split(regEx);
         int[] numbers = new int[split.length];
         List<String> signes = new ArrayList<>();
+        int resultatInt  = 0;
 
         for (int i = 0; i < split.length; i++) {
             numbers[i] = Integer.parseInt(split[i]);
@@ -33,14 +50,26 @@ public class Calcul {
             }
         }
 
+        System.out.println("TipusCalcul: " + tipusCalcul);
         System.out.println("Numbers: " + Arrays.toString(numbers));
         this.numbers = numbers;
 
         System.out.println("Signes: " + signes);
         this.signes = signes;
+
+        if (tipusCalcul.equals("POLINOMI")) {
+            System.out.println("FuncionaPOLINOMI");
+            int calculActual = calculSimple(numbers, signes);
+            resultatString = Integer.toString(calculActual);
+        }
+
+        if (tipusCalcul.equals("RPN")) {
+            System.out.println("FuncionaRPN");
+        }
     }
 
     public static int calculSimple(int[] numbers, List<String> signes) {
+
         int resultat = 0;
         int recorrNumbers = 0;
         int aux = 0;
