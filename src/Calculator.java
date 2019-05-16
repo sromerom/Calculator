@@ -1,3 +1,4 @@
+import Calculs.Calcul;
 import Keypads.KeypadBase;
 import Keypads.KeypadRomans;
 import Keypads.KeypadNormal;
@@ -25,6 +26,7 @@ public class Calculator extends JFrame {
     private JComboBox tipusOp;
     private JComboBox tipusBase;
     private CardLayout cl;
+    private String opcioElegida;
 
     final static String KEYPAD_NORMAL = "Keypad per defecte";
     final static String KEYPAD_ROMANS = "Keypad per operacions amb numeros romans";
@@ -49,7 +51,7 @@ public class Calculator extends JFrame {
         tipusOp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String opcioElegida = tipusOp.getSelectedItem().toString();
+                opcioElegida = tipusOp.getSelectedItem().toString();
                 System.out.println(opcioElegida);
                 switch (opcioElegida) {
                     case "Tipus operacio":
@@ -119,8 +121,9 @@ public class Calculator extends JFrame {
         });
 
 
+
         keypad = new JPanel();
-        kn = new KeypadNormal(pantallaRes);
+        kn = new KeypadNormal(pantallaOp, pantallaRes);
         kr = new KeypadRomans();
         //kb = new KeypadBase();
 
@@ -130,80 +133,6 @@ public class Calculator extends JFrame {
         keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
 
-
-    }
-
-    public static int calcula(int[] numbers, List<String> signes) {
-        int resultat = 0;
-        int recorrNumbers = 0;
-        int aux = 0;
-        while (aux < signes.size()) {
-            //Si el total de numeros es senar l'ultim numero el calcularem diferent
-            if (recorrNumbers == signes.size() && numbers.length % 2 != 0) {
-                switch (signes.get(aux)) {
-                    case "+":
-                        resultat = resultat + numbers[numbers.length - 1];
-                        break;
-                    case "-":
-                        resultat = resultat - numbers[numbers.length - 1];
-                        break;
-                    case "*":
-                        resultat = resultat * numbers[numbers.length - 1];
-                        break;
-                    case "/":
-                        resultat = resultat / numbers[numbers.length - 1];
-                        break;
-                    default:
-                        // code block
-                }
-                break;
-            }
-
-            //Si es l'inici del numeros...
-            if (recorrNumbers == 0) {
-                switch (signes.get(aux)) {
-                    case "+":
-                        resultat = numbers[0] + numbers[1];
-                        break;
-                    case "-":
-                        resultat = numbers[0] - numbers[1];
-                        break;
-                    case "*":
-                        resultat = numbers[0] * numbers[1];
-                        break;
-                    case "/":
-                        resultat = numbers[0] / numbers[1];
-                        break;
-                    default:
-                        System.out.println("error");
-                }
-
-                recorrNumbers += 1;
-            } else {
-                switch (signes.get(aux)) {
-                    case "+":
-                        resultat = resultat + numbers[recorrNumbers];
-                        break;
-                    case "-":
-                        resultat = resultat - numbers[recorrNumbers];
-                        break;
-                    case "*":
-                        resultat = resultat * numbers[recorrNumbers];
-                        break;
-                    case "/":
-                        resultat = resultat / numbers[recorrNumbers];
-                        break;
-                    default:
-                        System.out.println("error");
-                }
-
-            }
-
-            recorrNumbers++;
-            aux++;
-
-        }
-        return resultat;
     }
 
     public JPanel getTotal() {

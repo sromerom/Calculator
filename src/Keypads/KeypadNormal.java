@@ -1,11 +1,14 @@
 package Keypads;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Calculs.Calcul;
+
 public class KeypadNormal extends JPanel {
     boolean primeraVegada = true;
+    private Calcul calcul;
+    //private String resultat = "";
     private JPanel numpadBasic;
     private JButton a1Button;
     private JButton a4Button;
@@ -36,42 +39,25 @@ public class KeypadNormal extends JPanel {
     private JButton delButton;
     private JButton resetButton;
     private String numPantalla;
-
     public KeypadNormal() {
         numpadBasic = new JPanel();
     }
 
-    public KeypadNormal(JTextField jtf) {
+    public KeypadNormal(JTextField jtfOp, JTextField jtfRes) {
         numpadBasic = new JPanel();
 
-        /*
         eqButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+            public void actionPerformed(ActionEvent e) {
 
-                String operacio = .getText();
-                String regEx = "[\\+\\-\\*\\/]";
-                String split[] = operacio.split(regEx);
-               public static int calcula ( int[] numbers, List<String > signes){
-                    resultat = numbers[0] / numbers[1];
-                    break;
-                    default:
-                        // code block
-                        System.out.println("error");
-                }
-
-                recorrNumbers += 1;
-                public static int calcula ( int[] numbers, List<String > signes){
-                    resultat = resultat / numbers[recorrNumbers];
-                    break;
-                    default:
-                        // code block
-                        System.out.println("error");
-                }
+                calcul = new Calcul(numPantalla);
+                int calculActual = calcul.calculSimple(calcul.getNumbers(), calcul.getSignes());
+                String calculActualString = Integer.toString(calculActual);
+                jtfRes.setText(calculActualString);
 
             }
         });
-        */
+
 
         a0Button.addActionListener(new ActionListener() {
             @Override
@@ -79,10 +65,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "0";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "0";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -93,10 +79,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "1";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "1";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -107,10 +93,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "2";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "2";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -121,10 +107,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "3";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "3";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -135,10 +121,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "4";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "4";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -149,10 +135,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "5";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "5";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -163,10 +149,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "6";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "6";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -177,10 +163,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "7";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "7";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -192,10 +178,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "8";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "8";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -207,10 +193,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "9";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "9";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -221,10 +207,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "+";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "+";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -235,10 +221,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "-";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "-";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -249,10 +235,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "*";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "*";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -263,10 +249,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = "/";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += "/";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -277,10 +263,10 @@ public class KeypadNormal extends JPanel {
                 if (primeraVegada) {
                     numPantalla = ".";
                     primeraVegada = false;
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += ".";
-                    jtf.setText(numPantalla);
+                    jtfOp.setText(numPantalla);
                 }
             }
         });
@@ -292,7 +278,7 @@ public class KeypadNormal extends JPanel {
                 String eliminarString = Character.toString(eliminar);
                 String stringNou = numPantalla.replaceAll(eliminarString, "");
                 numPantalla = stringNou;
-                jtf.setText(stringNou);
+                jtfOp.setText(stringNou);
             }
         });
 
@@ -300,9 +286,10 @@ public class KeypadNormal extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 numPantalla = "";
-                jtf.setText(numPantalla);
+                jtfOp.setText(numPantalla);
             }
         });
+
     }
 
     public JPanel getNumpadBasic() {

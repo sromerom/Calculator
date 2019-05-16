@@ -4,18 +4,18 @@ import javax.swing.*;
 
 public class KeypadRomans extends JPanel{
     private JPanel numpadRomans;
-    private JButton iButton;
-    private JButton IVButton;
-    private JButton VIIButton;
+    private JButton ⅰButton;
+    private JButton ⅳButton;
+    private JButton ⅶButton;
     private JButton a0Button;
-    private JButton IIButton;
-    private JButton vButton;
-    private JButton VIIIButton;
+    private JButton ⅱButton;
+    private JButton ⅴButton;
+    private JButton ⅷButton;
     private JButton dotButton;
     private JButton eqButton;
     private JButton IXButton;
-    private JButton VIButton;
-    private JButton IIIButton;
+    private JButton ⅵButton;
+    private JButton ⅲButton;
     private JButton mulButton;
     private JButton sumButton;
     private JButton resButton;
@@ -23,7 +23,7 @@ public class KeypadRomans extends JPanel{
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton xButton1;
+    private JButton ceButton;
 
     public KeypadRomans() {
 
