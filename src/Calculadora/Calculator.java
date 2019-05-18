@@ -1,6 +1,5 @@
 package Calculadora;
 
-import Calculs.Calcul;
 import Keypads.KeypadBase;
 import Keypads.KeypadRomans;
 import Keypads.KeypadNormal;
@@ -9,7 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class Calculator extends JFrame {
 
@@ -26,6 +26,7 @@ public class Calculator extends JFrame {
     private JTextField pantallaRes;
     private JComboBox tipusOp;
     private JComboBox tipusBase;
+    //private JComboBox aux;
     private CardLayout cl;
     private String opcioElegida;
 
@@ -142,7 +143,7 @@ public class Calculator extends JFrame {
         });
 
         keypad = new JPanel();
-        kn = new KeypadNormal(pantallaOp, pantallaRes, opcioElegida);
+        kn = new KeypadNormal(pantallaOp, pantallaRes, "POLINOMI");
         kr = new KeypadRomans();
         //kb = new KeypadBase();
 
@@ -152,9 +153,29 @@ public class Calculator extends JFrame {
         keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
 
+        /*
+        tipusOp.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    if (tipusOp.getSelectedIndex() > 0) {
+                        aux.setModel(new DefaultComboBoxModel(addItemsSubcombobox(tipusOp.getSelectedItem().toString())));
+                    }
+                }
+            }
+        });
+        */
     }
 
-
+    public String [] addItemsSubcombobox(String tipusOpcioString) {
+        String [] valuesSubCombo = new String[3];
+        if (tipusOpcioString.equals("POLINOMI")) {
+            valuesSubCombo[0] = "Suma";
+            valuesSubCombo[1] = "Resta";
+            valuesSubCombo[2] = "Multiplicacio";
+        }
+        return valuesSubCombo;
+    }
     public JPanel getTotal() {
         return total;
     }

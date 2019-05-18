@@ -49,6 +49,19 @@ public class KeypadNormal extends JPanel {
     public KeypadNormal(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
         numpadBasic = new JPanel();
         //System.out.println(calc.getOpcioElegida());
+        eqButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                numPantalla = jtfOp.getText();
+                System.out.println("Tipus opcio " + opcioElegida);
+                calcul = new Calcul(numPantalla, opcioElegida);
+                jtfRes.setText(calcul.getResultatString());
+                numPantalla = "";
+
+            }
+        });
+
+
         a0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -277,16 +290,6 @@ public class KeypadNormal extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 numPantalla = "";
                 jtfOp.setText(numPantalla);
-            }
-        });
-
-        eqButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Tipus opcio " + opcioElegida);
-                calcul = new Calcul(numPantalla, opcioElegida);
-                jtfRes.setText(calcul.getResultatString());
-
             }
         });
 
