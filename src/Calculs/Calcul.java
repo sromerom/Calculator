@@ -1,5 +1,7 @@
 package Calculs;
 
+import Calculadora.Calculator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,48 +15,16 @@ public class Calcul {
     String signePolinomi = "";
     private String resultatConversio;
 
-    public String getResultatString() {
-        return resultatString;
-    }
-
-    public void setResultatString(String resultatString) {
-        this.resultatString = resultatString;
-    }
-
-    public String getResultatConversio() {
-        return resultatConversio;
-    }
-
-    public void setResultatConversio(String resultatConversio) {
-        this.resultatConversio = resultatConversio;
-    }
-
-    private enum tipusCalcul {
-        NORMAL,
-        ROMA,
-        POLINOMIS
-
-    }
-
-    String actualCalcul = "";
-
-    public Calcul() {
-
-    }
-
     public Calcul(String operacio, String tipusCalcul) {
         this.operacio = operacio;
         this.tipusCalcul = tipusCalcul;
-
-        System.out.println(operacio);
-
 
         switch (tipusCalcul) {
             case "POLINOMI":
                 System.out.println("Funciona POLINOMI");
 
                 Polynomial[] resultat = calculPolinomi(operacio);
-                System.out.println("signoooooooooooo" + signePolinomi);
+                //System.out.println("signoooooooooooo" + signePolinomi);
                 //System.out.println(resultat[0].add(resultat[1]).toString());
 
                 for (int i = 0; i < resultat.length; i++) {
@@ -74,6 +44,9 @@ public class Calcul {
             case "ROMANS":
                 NumeroRoma numeroroma = new NumeroRoma(operacio);
                 resultatString = Integer.toString(numeroroma.getResultat());
+                break;
+            case "FRACCIONS":
+
                 break;
             case "OCTAL":
                 separa(operacio);
@@ -215,6 +188,22 @@ public class Calcul {
 
 
         return resultat;
+    }
+
+    public String getResultatString() {
+        return resultatString;
+    }
+
+    public void setResultatString(String resultatString) {
+        this.resultatString = resultatString;
+    }
+
+    public String getResultatConversio() {
+        return resultatConversio;
+    }
+
+    public void setResultatConversio(String resultatConversio) {
+        this.resultatConversio = resultatConversio;
     }
 
 }

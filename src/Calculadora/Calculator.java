@@ -10,8 +10,6 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 public class Calculator extends JFrame {
 
@@ -19,6 +17,7 @@ public class Calculator extends JFrame {
     KeypadNormal kn;
     KeypadRomans kr;
     KeypadBase kb;
+
     //JPanel principals
     private JPanel total;
     private JPanel pantalla;
@@ -30,8 +29,8 @@ public class Calculator extends JFrame {
     private JComboBox tipusBase;
     //private JComboBox aux;
     private CardLayout cl;
-    private String opcioElegida;
-
+    public static String opcioElegida;
+    public static String opcioBaseElegida;
     private enum tipusOperacions {
         POLINOMI,
         ROMANS,
@@ -55,7 +54,6 @@ public class Calculator extends JFrame {
     final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
 
     public Calculator() {
-
         tipusOp.setUI(new BasicComboBoxUI());
         tipusBase.setUI(new BasicComboBoxUI());
         pantallaRes.setBorder(new EmptyBorder(0,0,0,0));
@@ -78,45 +76,54 @@ public class Calculator extends JFrame {
 
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
         tipusOp.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                opcioElegida = tipusOp.getSelectedItem().toString();
-                System.out.println(opcioElegida);
-                switch (opcioElegida) {
+
+                String opcioElegida2 = tipusOp.getSelectedItem().toString();
+                switch (opcioElegida2) {
                     case "Tipus operacio":
                         break;
                     case "POLINOMI":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("POLINOMI");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "ROMANS":
                         cl.show(keypad, KEYPAD_ROMANS);
                         System.out.println("ROMANS");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "RPN":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("RPN");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "VECTORS":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("VECTORS");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "MATRIUS":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("MATRIUS");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "FRACCIONS":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("FRACCIONS");
+                        opcioElegida = opcioElegida2;
                         break;
 
                     case "CANVI_UNITATS":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("CANVI UNITATS");
+                        opcioElegida = opcioElegida2;
                         break;
                     case "CANVI_MONETARI":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("CANVI MONETARI");
+                        opcioElegida = opcioElegida2;
                         break;
                     default:
                         // code block
@@ -124,26 +131,31 @@ public class Calculator extends JFrame {
             }
         });
 
+
         tipusBase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String opcioElegidaBase = tipusBase.getSelectedItem().toString();
-                switch (opcioElegidaBase) {
+                String opcioElegidaBase2 = tipusBase.getSelectedItem().toString();
+                switch (opcioElegidaBase2) {
                     case "DECIMAL":
                         cl.show(keypad, KEYPAD_BASE);
-                        System.out.println("Card 1");
+                        System.out.println("DECIMAL");
+                        opcioBaseElegida = opcioElegidaBase2;
                         break;
                     case "OCTAL":
                         cl.show(keypad, KEYPAD_BASE);
-                        System.out.println("OEEEO");
+                        System.out.println("OCTAL");
+                        opcioBaseElegida = opcioElegidaBase2;
                         break;
                     case "HEXADECIMAL":
                         cl.show(keypad, KEYPAD_BASE);
-                        System.out.println("Card 1");
+                        System.out.println("HEXADECIMAL");
+                        opcioBaseElegida = opcioElegidaBase2;
                         break;
                     case "BINARI":
                         cl.show(keypad, KEYPAD_BASE);
-                        System.out.println("Card 1");
+                        System.out.println("BINARI");
+                        opcioBaseElegida = opcioElegidaBase2;
                         break;
                     default:
 
@@ -152,9 +164,10 @@ public class Calculator extends JFrame {
         });
 
         keypad = new JPanel();
-        kn = new KeypadNormal(pantallaOp, pantallaRes, "ROMANS");
-        kr = new KeypadRomans(pantallaOp, pantallaRes, "ROMANS");
-        kb = new KeypadBase(pantallaOp, pantallaRes, "BINARI");
+
+        kn = new KeypadNormal(pantallaOp, pantallaRes);
+        kr = new KeypadRomans(pantallaOp, pantallaRes);
+        kb = new KeypadBase(pantallaOp, pantallaRes);
 
         total.add(keypad, BorderLayout.CENTER);
         cl = new CardLayout(0, 0);
@@ -175,6 +188,7 @@ public class Calculator extends JFrame {
             }
         });
         */
+
     }
 
     public String [] addItemsSubcombobox(String tipusOpcioString) {

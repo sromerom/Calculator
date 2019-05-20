@@ -50,19 +50,17 @@ public class KeypadNormal extends JPanel {
         numpadBasic = new JPanel();
     }
 
-    public KeypadNormal(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
-
+    public KeypadNormal(JTextField jtfOp, JTextField jtfRes) {
 
 
         numpadBasic = new JPanel();
-
         //System.out.println(calc.getOpcioElegida());
         eqButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numPantalla = jtfOp.getText();
-                System.out.println("Tipus opcio " + opcioElegida);
-                calcul = new Calcul(numPantalla, opcioElegida);
+                System.out.println("Tipus opcio " + Calculator.opcioElegida);
+                calcul = new Calcul(numPantalla, Calculator.opcioElegida);
                 jtfRes.setText(calcul.getResultatString());
                 numPantalla = "";
 

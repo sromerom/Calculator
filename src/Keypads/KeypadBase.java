@@ -1,5 +1,6 @@
 package Keypads;
 
+import Calculadora.Calculator;
 import Calculs.Calcul;
 
 import javax.swing.*;
@@ -46,9 +47,10 @@ public class KeypadBase extends JPanel{
     private JButton fButton;
     private JPanel pantallaConversor;
     private JTextField pantallaCon;
+    private JLabel tagDecimal;
     private Calcul calcul;
     private String numPantalla;
-    public KeypadBase(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
+    public KeypadBase(JTextField jtfOp, JTextField jtfRes) {
 
         pantallaCon.setBorder(new EmptyBorder(0,0,0,0));
 
@@ -56,8 +58,8 @@ public class KeypadBase extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 numPantalla = jtfOp.getText();
-                System.out.println("Tipus opcio " + opcioElegida);
-                calcul = new Calcul(numPantalla, opcioElegida);
+                System.out.println("Tipus opcio " + Calculator.opcioBaseElegida);
+                calcul = new Calcul(numPantalla, Calculator.opcioBaseElegida);
 
                 jtfRes.setText(calcul.getResultatString());
                 pantallaCon.setText(calcul.getResultatConversio());

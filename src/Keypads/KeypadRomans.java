@@ -1,5 +1,6 @@
 package Keypads;
 
+import Calculadora.Calculator;
 import Calculs.Calcul;
 
 import javax.swing.*;
@@ -33,13 +34,13 @@ public class KeypadRomans extends JPanel {
     private String numPantalla;
     boolean primeraVegada = true;
 
-    public KeypadRomans(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
+    public KeypadRomans(JTextField jtfOp, JTextField jtfRes) {
         eqButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 numPantalla = jtfOp.getText();
-                System.out.println("Tipus opcio " + opcioElegida);
-                calcul = new Calcul(numPantalla, opcioElegida);
+                System.out.println("Tipus opcio " + Calculator.opcioElegida);
+                calcul = new Calcul(numPantalla, Calculator.opcioElegida);
                 jtfRes.setText(calcul.getResultatString());
                 numPantalla = "";
 
