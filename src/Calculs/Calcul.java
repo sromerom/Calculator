@@ -1,15 +1,17 @@
 package Calculs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class Calcul {
+    private String operacio;
+    private String tipusCalcul;
     private int[] numbers;
-    private List<String> signes;
+    List<String> signes;
     private String resultatString = "";
     String signePolinomi = "";
+    private String resultatConversio;
 
     public String getResultatString() {
         return resultatString;
@@ -17,6 +19,14 @@ public class Calcul {
 
     public void setResultatString(String resultatString) {
         this.resultatString = resultatString;
+    }
+
+    public String getResultatConversio() {
+        return resultatConversio;
+    }
+
+    public void setResultatConversio(String resultatConversio) {
+        this.resultatConversio = resultatConversio;
     }
 
     private enum tipusCalcul {
@@ -33,15 +43,76 @@ public class Calcul {
     }
 
     public Calcul(String operacio, String tipusCalcul) {
-        /*
+        this.operacio = operacio;
+        this.tipusCalcul = tipusCalcul;
+
+        System.out.println(operacio);
+
+
+        switch (tipusCalcul) {
+            case "POLINOMI":
+                System.out.println("Funciona POLINOMI");
+
+                Polynomial[] resultat = calculPolinomi(operacio);
+                System.out.println("signoooooooooooo" + signePolinomi);
+                //System.out.println(resultat[0].add(resultat[1]).toString());
+
+                for (int i = 0; i < resultat.length; i++) {
+                    if (i == 0) {
+                        continue;
+                    } else {
+                        if (signePolinomi.equals("+")) {
+                            System.out.println("Es una suma!!!!!!!");
+                            setResultatString(resultat[i - 1].add(resultat[i]).toString());
+                        } else if (signePolinomi.equals("*")) {
+                            System.out.println("Es una multiplicacion!!!!!!!!!!!");
+                            setResultatString(resultat[i - 1].mult(resultat[i]).toString());
+                        }
+                    }
+                }
+                break;
+            case "ROMANS":
+                NumeroRoma numeroroma = new NumeroRoma(operacio);
+                resultatString = Integer.toString(numeroroma.getResultat());
+                break;
+            case "OCTAL":
+                separa(operacio);
+                resultatString = Integer.toString(calculSimple(numbers, signes));
+
+                if (signes.size() == 0) {
+                    ConversorBase conversorBase = new ConversorBase(operacio, tipusCalcul);
+                    resultatConversio = Integer.toString(conversorBase.getResultat());
+                } else {
+                    ConversorBase conversorBase = new ConversorBase(resultatString, tipusCalcul);
+                    resultatConversio = Integer.toString(conversorBase.getResultat());
+                }
+                break;
+            case "HEXADECIMAL":
+                ConversorBase conversorBase = new ConversorBase(operacio, tipusCalcul);
+                resultatConversio = Integer.toString(conversorBase.getResultat());
+                break;
+            case "BINARI":
+                ConversorBase conversorbase = new ConversorBase(operacio, tipusCalcul);
+                resultatConversio = Integer.toString(conversorbase.getResultat());
+                break;
+            case "RPN":
+                System.out.println("FuncionaRPN");
+                separa(operacio);
+                resultatString = Integer.toString(calculSimple(numbers, signes));
+                break;
+            default:
+
+        }
+    }
+
+    public void separa(String operacio) {
         String regEx = "[\\+\\-\\*\\/]";
         String split[] = operacio.split(regEx);
         int[] numbers = new int[split.length];
         List<String> signes = new ArrayList<>();
-        int resultatInt  = 0;
 
         for (int i = 0; i < split.length; i++) {
-            numbers[i] = Integer.parseInt(split[i]);
+            numbers[i] = Integer.parseInt(split[i].replaceAll(" ", ""));
         }
 
         for (int i = 0; i < operacio.length(); i++) {
@@ -51,57 +122,12 @@ public class Calcul {
                 signes.add(actualString);
             }
         }
-        */
-        //System.out.println("TipusCalcul: " + tipusCalcul);
-        //System.out.println("Numbers: " + Arrays.toString(numbers));
-        //this.numbers = numbers;
 
-        //System.out.println("Signes: " + signes);
-        //this.signes = signes;
-
-        System.out.println(operacio);
-
-
-        if (tipusCalcul.equals("POLINOMI")) {
-            System.out.println("Funciona POLINOMI");
-
-            //suma
-            //Polynomial p1 = new Polynomial("2x^2 + 3x - 5");
-            //Polynomial p2 = new Polynomial("7x^2 + 10");
-            //System.out.println(p1.add(p2).toString());
-
-            //multiplicacio
-            //Polynomial p1 = new Polynomial("x^4 - 6x^2 + 8");
-            //Polynomial p2 = new Polynomial("-6x^6 - 91x + 12");
-            //System.out.println(p1.mult(p2).toString());
-            //System.out.println(Arrays.toString(calculPolinomi(operacio)));
-
-
-            Polynomial[] resultat = calculPolinomi(operacio);
-            System.out.println("signoooooooooooo" + signePolinomi);
-            //System.out.println(resultat[0].add(resultat[1]).toString());
-
-            for (int i = 0; i < resultat.length; i++) {
-                if (i == 0) {
-                    continue;
-                } else {
-                    if (signePolinomi.equals("+")) {
-                        System.out.println("Es una suma!!!!!!!");
-                        setResultatString(resultat[i - 1].add(resultat[i]).toString());
-                    } else if (signePolinomi.equals("*")) {
-                        System.out.println("Es una multiplicacion!!!!!!!!!!!");
-                        setResultatString(resultat[i - 1].mult(resultat[i]).toString());
-                    }
-                }
-            }
-        }
-        if (tipusCalcul.equals("RPN")) {
-            System.out.println("FuncionaRPN");
-        }
+        this.numbers = numbers;
+        this.signes = signes;
     }
 
     public static int calculSimple(int[] numbers, List<String> signes) {
-
         int resultat = 0;
         int recorrNumbers = 0;
         int aux = 0;
@@ -191,20 +217,4 @@ public class Calcul {
         return resultat;
     }
 
-
-    public int[] getNumbers() {
-        return numbers;
-    }
-
-    public void setNumbers(int[] numbers) {
-        this.numbers = numbers;
-    }
-
-    public List<String> getSignes() {
-        return signes;
-    }
-
-    public void setSignes(List<String> signes) {
-        this.signes = signes;
-    }
 }

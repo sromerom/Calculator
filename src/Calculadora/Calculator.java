@@ -5,6 +5,8 @@ import Keypads.KeypadRomans;
 import Keypads.KeypadNormal;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +46,7 @@ public class Calculator extends JFrame {
     private enum enumTipusBase {
         DECIMAL,
         OCTAL,
-        HEXACIMAL,
+        HEXADECIMAL,
         BINARI
     }
 
@@ -53,6 +55,11 @@ public class Calculator extends JFrame {
     final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
 
     public Calculator() {
+
+        tipusOp.setUI(new BasicComboBoxUI());
+        tipusBase.setUI(new BasicComboBoxUI());
+        pantallaRes.setBorder(new EmptyBorder(0,0,0,0));
+        pantallaOp.setBorder(new EmptyBorder(0,0,0,0));
 
         tipusOp.addItem(tipusOperacions.POLINOMI);
         tipusOp.addItem(tipusOperacions.ROMANS);
@@ -65,7 +72,7 @@ public class Calculator extends JFrame {
 
         tipusBase.addItem(enumTipusBase.DECIMAL);
         tipusBase.addItem(enumTipusBase.OCTAL);
-        tipusBase.addItem(enumTipusBase.HEXACIMAL);
+        tipusBase.addItem(enumTipusBase.HEXADECIMAL);
         tipusBase.addItem(enumTipusBase.BINARI);
 
 
@@ -122,18 +129,20 @@ public class Calculator extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String opcioElegidaBase = tipusBase.getSelectedItem().toString();
                 switch (opcioElegidaBase) {
-                    case "Tipus operacio":
-                        break;
-                    case "Base 2":
-                        cl.show(keypad, KEYPAD_ROMANS);
+                    case "DECIMAL":
+                        cl.show(keypad, KEYPAD_BASE);
                         System.out.println("Card 1");
                         break;
-                    case "Base 8":
-                        cl.show(keypad, KEYPAD_ROMANS);
+                    case "OCTAL":
+                        cl.show(keypad, KEYPAD_BASE);
+                        System.out.println("OEEEO");
+                        break;
+                    case "HEXADECIMAL":
+                        cl.show(keypad, KEYPAD_BASE);
                         System.out.println("Card 1");
                         break;
-                    case "Base 16":
-                        cl.show(keypad, KEYPAD_ROMANS);
+                    case "BINARI":
+                        cl.show(keypad, KEYPAD_BASE);
                         System.out.println("Card 1");
                         break;
                     default:
@@ -143,15 +152,16 @@ public class Calculator extends JFrame {
         });
 
         keypad = new JPanel();
-        kn = new KeypadNormal(pantallaOp, pantallaRes, "POLINOMI");
-        kr = new KeypadRomans();
-        //kb = new KeypadBase();
+        kn = new KeypadNormal(pantallaOp, pantallaRes, "ROMANS");
+        kr = new KeypadRomans(pantallaOp, pantallaRes, "ROMANS");
+        kb = new KeypadBase(pantallaOp, pantallaRes, "BINARI");
 
         total.add(keypad, BorderLayout.CENTER);
         cl = new CardLayout(0, 0);
         keypad.setLayout(cl);
         keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
+        keypad.add(kb.getNumpadBase(), KEYPAD_BASE);
 
         /*
         tipusOp.addItemListener(new ItemListener() {

@@ -1,6 +1,11 @@
 package Keypads;
 
+import Calculs.Calcul;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class KeypadBase extends JPanel{
     boolean primeraVegada = true;
@@ -39,9 +44,27 @@ public class KeypadBase extends JPanel{
     private JButton dButton;
     private JButton eButton;
     private JButton fButton;
+    private JPanel pantallaConversor;
+    private JTextField pantallaCon;
+    private Calcul calcul;
     private String numPantalla;
-    KeypadBase() {
-        setNumpadBase(new JPanel());
+    public KeypadBase(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
+
+        pantallaCon.setBorder(new EmptyBorder(0,0,0,0));
+
+        eqButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                numPantalla = jtfOp.getText();
+                System.out.println("Tipus opcio " + opcioElegida);
+                calcul = new Calcul(numPantalla, opcioElegida);
+
+                jtfRes.setText(calcul.getResultatString());
+                pantallaCon.setText(calcul.getResultatConversio());
+                numPantalla = "";
+
+            }
+        });
     }
 
     public JPanel getNumpadBase() {

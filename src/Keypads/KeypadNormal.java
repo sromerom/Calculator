@@ -1,7 +1,11 @@
 package Keypads;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import Calculs.Calcul;
 import Calculadora.Calculator;
@@ -47,7 +51,11 @@ public class KeypadNormal extends JPanel {
     }
 
     public KeypadNormal(JTextField jtfOp, JTextField jtfRes, String opcioElegida) {
+
+
+
         numpadBasic = new JPanel();
+
         //System.out.println(calc.getOpcioElegida());
         eqButton.addActionListener(new ActionListener() {
             @Override
