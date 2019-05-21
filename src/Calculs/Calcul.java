@@ -46,7 +46,8 @@ public class Calcul {
                 resultatString = Integer.toString(numeroroma.getResultat());
                 break;
             case "FRACCIONS":
-
+                Fraccio f = new Fraccio(operacio);
+                resultatString = f.getResultat();
                 break;
             case "OCTAL":
                 separa(operacio);
