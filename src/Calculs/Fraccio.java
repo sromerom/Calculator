@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Fraccio {
-    List<String> signeList;
+    private List<String> signeList;
     private String resultat;
 
     public Fraccio(String operacio) {
