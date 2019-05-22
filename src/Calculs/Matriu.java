@@ -30,13 +30,17 @@ public class Matriu {
         resultatList.toArray(resultat);
 
         String stringProva = "";
-        List<Integer> llistaProva = new ArrayList<>();
+        List<String> llistaProva = new ArrayList<>();
+        int ta = 1;
         for (int i = 0; i < resultat.length; i++) {
             for (int j = 2; j < resultat[i].length() - 2; j++) {
                 String actual = Character.toString(resultat[i].charAt(j));
 
                 if (actual.equals("}")) {
                     actual.replace("}", "/");
+                    if (i == 0) {
+                        ta++;
+                    }
                 } else if (actual.equals("{")) {
                     actual.replace("{", "");
                 } else if (actual.equals(",")) {
@@ -45,18 +49,26 @@ public class Matriu {
                     stringProva = stringProva + actual;
                 }
             }
-            llistaProva.add(Integer.parseInt(stringProva));
+            llistaProva.add(stringProva);
             stringProva = "";
         }
 
-
         System.out.println(llistaProva);
+        System.out.println(ta);
+        System.out.println("Llargaria tamany matrius totals: " + llistaProva.size());
+        System.out.println("Llargaria de cada matriu: " + ta);
 
-        int [][] matriuPasada = new int[1][1];
 
+        int [] matriuDeMatriu = new int[ta];
+        for (int i = 0; i < 1; i++) {
+            String actual = llistaProva.get(i);
+            int actualMatriu =  actual.charAt(i);
+            System.out.println(actualMatriu);
+
+        }
+        int [][] matriuPasada = new int[2][ta];
 
     }
-
     public static int[][] sumaMatrius(int[][] matriu1, int[][] matriu2) throws Exception {
         int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
 
@@ -71,7 +83,7 @@ public class Matriu {
 
     static class main {
         public static void main(String[] args) {
-            Matriu c = new Matriu("{{1, 2, 3}{3, 4, 5}} |+| {{5, 6, 7}{7, 8, 9}}");
+            Matriu c = new Matriu("{{1, 2, 3}{3, 4, 5}{6, 7, 8}{1, 2, 3}{3, 4, 5}{6, 7, 8}} |+| {{5, 6, 7}{7, 8, 9}{7, 8, 9}{1, 2, 3}{3, 4, 5}{6, 7, 8}}");
 
         }
     }
