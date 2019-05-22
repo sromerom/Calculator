@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Matriu {
     private List<String> signeList;
-    private String resultat;
+    private int [][] resultat;
 
     public Matriu(String operacio) {
         List<String> resultatList = new ArrayList<>();
@@ -26,18 +26,21 @@ public class Matriu {
         System.out.println("Signes: " + signeList);
         System.out.println("Numeros" + resultatList);
 
-        String[] resultat = new String[resultatList.size()];
-        resultatList.toArray(resultat);
+        String[] resultatf = new String[resultatList.size()];
+        resultatList.toArray(resultatf);
 
         String stringProva = "";
         List<String> llistaProva = new ArrayList<>();
         int ta = 1;
-        for (int i = 0; i < resultat.length; i++) {
-            for (int j = 2; j < resultat[i].length() - 2; j++) {
-                String actual = Character.toString(resultat[i].charAt(j));
+        int comes = 0;
+        boolean primeresComes = true;
+        for (int i = 0; i < resultatf.length; i++) {
+            for (int j = 2; j < resultatf[i].length() - 2; j++) {
+                String actual = Character.toString(resultatf[i].charAt(j));
 
                 if (actual.equals("}")) {
                     actual.replace("}", "/");
+                    primeresComes = false;
                     if (i == 0) {
                         ta++;
                     }
@@ -45,6 +48,9 @@ public class Matriu {
                     actual.replace("{", "");
                 } else if (actual.equals(",")) {
                     actual.replace(",", "");
+                    if (primeresComes) {
+                        comes++;
+                    }
                 } else {
                     stringProva = stringProva + actual;
                 }
@@ -52,24 +58,61 @@ public class Matriu {
             llistaProva.add(stringProva);
             stringProva = "";
         }
-
         System.out.println(llistaProva);
-        System.out.println(ta);
         System.out.println("Llargaria tamany matrius totals: " + llistaProva.size());
         System.out.println("Llargaria de cada matriu: " + ta);
+        comes = comes + 1;
+        System.out.println("Dades de cada matriu: " + comes);
 
+        int [][] matriu1 = new int [ta][comes];
+        int [][] matriu2 = new int [ta][comes];
+        int comparant = 0;
+        int c = 0;
 
-        int [] matriuDeMatriu = new int[ta];
-        for (int i = 0; i < 1; i++) {
-            String actual = llistaProva.get(i);
-            int actualMatriu =  actual.charAt(i);
-            System.out.println(actualMatriu);
+        for (int j = 0; j < ta; j++) {
+            comparant = 0;
+            String actualMatriu = llistaProva.get(0);
+            int actualCaracter;
+            while (comparant < comes) {
+                actualCaracter = Character.getNumericValue(actualMatriu.charAt(c));
+                if (comparant == 0) {
+                    matriu1[j][comparant] = actualCaracter;
+                } else {
+                    matriu1[j][comparant] = actualCaracter;
+                }
+                comparant++;
+                c++;
+            }
 
         }
-        int [][] matriuPasada = new int[2][ta];
+
+        c = 0;
+        for (int j = 0; j < ta; j++) {
+            comparant = 0;
+            String actualMatriu = llistaProva.get(1);
+            int actualCaracter;
+            while (comparant < comes) {
+                actualCaracter = Character.getNumericValue(actualMatriu.charAt(c));
+                if (comparant == 0) {
+                    matriu2[j][comparant] = actualCaracter;
+                } else {
+                    matriu2[j][comparant] = actualCaracter;
+                }
+                comparant++;
+                c++;
+            }
+
+        }
+        System.out.println(Arrays.deepToString(matriu1));
+        System.out.println(Arrays.deepToString(matriu2));
+
+        resultat = sumaMatrius(matriu1, matriu2);
+        System.out.println(Arrays.deepToString(resultat));
+
 
     }
-    public static int[][] sumaMatrius(int[][] matriu1, int[][] matriu2) throws Exception {
+
+    public static int[][] sumaMatrius(int[][] matriu1, int[][] matriu2){
         int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
 
         for (int i = 0; i < matriu1.length; i++) {
@@ -78,13 +121,24 @@ public class Matriu {
             }
         }
         System.out.println();
-        return null;
+        return resultatSumaMatrius;
+    }
+
+    public int[][] getResultat() {
+        return resultat;
+    }
+
+    public void setResultat(int[][] resultat) {
+        this.resultat = resultat;
     }
 
     static class main {
         public static void main(String[] args) {
-            Matriu c = new Matriu("{{1, 2, 3}{3, 4, 5}{6, 7, 8}{1, 2, 3}{3, 4, 5}{6, 7, 8}} |+| {{5, 6, 7}{7, 8, 9}{7, 8, 9}{1, 2, 3}{3, 4, 5}{6, 7, 8}}");
+            Matriu c = new Matriu("{{1, 2}{3, 4}} |+| {{1, 2}{3, 4}}");
 
+            //2 --> 1 = 2
+            //3 --> 2 = 3
+            //4 --> 3 = 4
         }
     }
 }

@@ -3,6 +3,7 @@ package Calculs;
 import Calculadora.Calculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -49,6 +50,9 @@ public class Calcul {
                 Fraccio f = new Fraccio(operacio);
                 resultatString = f.getResultat();
                 break;
+            case "MATRIUS":
+                Matriu m = new Matriu(operacio);
+                System.out.println("????" + Arrays.deepToString(m.getResultat()));
             case "OCTAL":
                 separa(operacio);
                 resultatString = Integer.toString(calculSimple(numbers, signes));
