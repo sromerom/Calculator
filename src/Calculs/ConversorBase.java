@@ -1,7 +1,10 @@
 package Calculs;
 
 public class ConversorBase {
-    private int resultat;
+    private int resultatDecimal;
+    private String resultatOctal;
+    private String resultatHexacimal;
+    private String resultatBinari;
 
     public ConversorBase(String operacio, String tipusOp) {
 
@@ -20,25 +23,62 @@ public class ConversorBase {
             for (int e = 0; e < resultatArray.length; e++, enrere--) {
                 int actual = resultatArray[e];
                 double operacioCon = (actual * Math.pow(8, enrere));
-                resultat = (int) (resultat + operacioCon);
+                resultatDecimal = (int) (resultatDecimal + operacioCon);
             }
+
+            resultatOctal = operacio;
+            resultatHexacimal = Integer.toHexString(resultatDecimal);
+            resultatBinari = Integer.toBinaryString(resultatDecimal);
+
+
         } else if (tipusOp.equals("HEXADECIMAL")) {
 
-            int decimal = Integer.parseInt(operacio,16);
-            resultat = decimal;
+            int decimal = Integer.parseInt(operacio, 16);
+            resultatDecimal = decimal;
+            resultatOctal = Integer.toOctalString(resultatDecimal);
+            resultatHexacimal = operacio;
+            resultatBinari = Integer.toBinaryString(resultatDecimal);
+
+
         } else if (tipusOp.equals("BINARI")) {
-            int decimal = Integer.parseInt(operacio,2);
-            resultat = decimal;
+            int decimal = Integer.parseInt(operacio, 2);
+            resultatDecimal = decimal;
+            resultatOctal = Integer.toOctalString(resultatDecimal);
+            resultatHexacimal = Integer.toHexString(resultatDecimal);
+            resultatBinari = operacio;
         }
 
-        System.out.println(resultat);
     }
 
-    public int getResultat() {
-        return resultat;
+    public int getResultatDecimal() {
+        return resultatDecimal;
     }
 
-    public void setResultat(int resultat) {
-        this.resultat = resultat;
+    public void setResultatDecimal(int resultatDecimal) {
+        this.resultatDecimal = resultatDecimal;
+    }
+
+    public String getResultatOctal() {
+        return resultatOctal;
+    }
+
+    public void setResultatOctal(String resultatOctal) {
+        this.resultatOctal = resultatOctal;
+    }
+
+    public String getResultatHexacimal() {
+        return resultatHexacimal;
+    }
+
+    public void setResultatHexacimal(String resultatHexacimal) {
+        this.resultatHexacimal = resultatHexacimal;
+    }
+
+    public String getResultatBinari() {
+        return resultatBinari;
+    }
+
+    public void setResultatBinari(String resultatBinari) {
+        this.resultatBinari = resultatBinari;
     }
 }

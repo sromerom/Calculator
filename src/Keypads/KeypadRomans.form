@@ -227,7 +227,7 @@
         </constraints>
         <properties>
           <background color="-589825"/>
-          <text value="Ce"/>
+          <text value="DEL"/>
         </properties>
       </component>
     </children>

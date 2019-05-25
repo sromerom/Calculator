@@ -37,8 +37,8 @@ public class KeypadBase extends JPanel{
     private JButton fXButton;
     private JButton parlButton;
     private JButton parrButton;
-    private JButton delButton;
-    private JButton resetButton;
+    private JButton corlButton;
+    private JButton corrButton;
     private JButton aButton;
     private JButton bButton;
     private JButton cButton;
@@ -46,13 +46,14 @@ public class KeypadBase extends JPanel{
     private JButton eButton;
     private JButton fButton;
     private JPanel pantallaConversor;
+    private JLabel resDecimal;
+    private JLabel resOctal;
+    private JLabel resHexadecimal;
+    private JLabel resBinari;
     private JTextField pantallaCon;
-    private JLabel tagDecimal;
     private Calcul calcul;
     private String numPantalla;
     public KeypadBase(JTextField jtfOp, JTextField jtfRes) {
-
-        pantallaCon.setBorder(new EmptyBorder(0,0,0,0));
 
         eqButton.addActionListener(new ActionListener() {
             @Override
@@ -61,10 +62,462 @@ public class KeypadBase extends JPanel{
                 System.out.println("Tipus opcio " + Calculator.opcioBaseElegida);
                 calcul = new Calcul(numPantalla, Calculator.opcioBaseElegida);
 
-                jtfRes.setText(calcul.getResultatString());
-                pantallaCon.setText(calcul.getResultatConversio());
+                //jtfRes.setText(calcul.getResultatString());
+
+                resDecimal.setText(Integer.toString(calcul.getResultatDecimal()));
+                resOctal.setText(calcul.getResultatOctal());
+                resHexadecimal.setText(calcul.getResultatHexacimal());
+                resBinari.setText(calcul.getResultatBinari());
+
+                //pantallaCon.setText(calcul.getResultatConversio());
                 numPantalla = "";
 
+            }
+        });
+
+
+        a0Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "0";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "0";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a1Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "1";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "1";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a2Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "2";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "2";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a3Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "3";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "3";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a4Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "4";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "4";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a5Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "5";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "5";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a6Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "6";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "6";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        a7Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "7";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "7";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+
+        a8Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "8";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "8";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+
+        a9Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "9";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "9";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        sumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "+";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "+";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        resButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "-";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "-";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        mulButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "*";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "*";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        divButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "/";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "/";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        dotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = ".";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += ".";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+
+        DELButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                numPantalla = "";
+                jtfOp.setText(numPantalla);
+            }
+        });
+
+        xButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "!";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "!";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        lnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "ln";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "ln";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        logButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "log";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "log";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        sinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "sin";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "sin";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        cosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "cos";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "cos";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        parlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "(";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "(";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        parrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = ")";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += ")";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        EXPButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "exp";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "exp";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        corlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "{";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "{";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        corrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "}";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "}";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        aButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "A";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "A";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        bButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "B";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "B";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        cButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "C";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "C";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        dButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "D";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "D";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        eButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "E";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "E";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        fButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "F";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "F";
+                    jtfOp.setText(numPantalla);
+                }
             }
         });
     }

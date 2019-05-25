@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Matriu {
-    private List<String> signeList;
+    private String signeList;
     private int [][] resultat;
 
     public Matriu(String operacio) {
@@ -18,9 +18,8 @@ public class Matriu {
             resultatList.add(split[i].replaceAll(" ", ""));
         }
 
-        signeList = new ArrayList<>();
         for (int i = 1; i < split.length; i += 2) {
-            signeList.add(split[i].replaceAll(" ", ""));
+            signeList = split[i].replaceAll(" ", "");
         }
 
         System.out.println("Signes: " + signeList);
@@ -106,7 +105,15 @@ public class Matriu {
         System.out.println(Arrays.deepToString(matriu1));
         System.out.println(Arrays.deepToString(matriu2));
 
-        resultat = sumaMatrius(matriu1, matriu2);
+
+        if (signeList.equals("+")) {
+            resultat = sumaMatrius(matriu1, matriu2);
+        } else if (signeList.equals("-")) {
+
+        } else if (signeList.equals("*")) {
+            resultat = mult(matriu1, matriu2);
+        }
+
         System.out.println(Arrays.deepToString(resultat));
 
 
@@ -122,6 +129,47 @@ public class Matriu {
         }
         System.out.println();
         return resultatSumaMatrius;
+    }
+
+    public static int[][] restaMatrius(int[][] matriu1, int[][] matriu2){
+        int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
+
+        for (int i = 0; i < matriu1.length; i++) {
+            for (int j = 0; j < matriu2.length; j++) {
+                resultatSumaMatrius[i][j] = matriu1[i][j] - matriu2[i][j];
+            }
+        }
+        System.out.println();
+        return resultatSumaMatrius;
+    }
+
+
+    static int[][] mult(int[][] mat1, int[][] mat2) {
+        int dimv1 = mat1.length;
+        int dimh1 = mat1[0].length;
+        int dimv2 = mat2.length;
+        int dimh2 = mat2[0].length;
+        if (dimh1 != dimv2) {
+            // Les matrius no són compatibles
+            return null;
+        }
+
+        // Creació de la matriu resultat amb les dimensions corresponents
+        int[][] result = new int[dimv1][dimh2];
+
+        // Operem
+        for (int line = 0; line < dimv1; line++) {
+            for (int col = 0; col < dimh2; col++) {
+                int part = 0;
+                for (int i = 0; i < dimh1; i++) {
+                    part += mat1[line][i] * mat2[i][col];
+                }
+                result[line][col] = part;
+            }
+        }
+
+        // Tornem el resultat
+        return result;
     }
 
     public int[][] getResultat() {

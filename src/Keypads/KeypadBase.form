@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Keypads.KeypadBase">
   <grid id="27dc6" binding="numpadBase" layout-manager="GridLayoutManager" row-count="6" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="30" left="30" bottom="30" right="30"/>
+    <margin top="0" left="30" bottom="30" right="30"/>
     <constraints>
-      <xy x="20" y="20" width="670" height="300"/>
+      <xy x="20" y="20" width="670" height="363"/>
     </constraints>
     <properties>
       <background color="-5461074"/>
@@ -296,7 +296,7 @@
           <text value=")"/>
         </properties>
       </component>
-      <component id="eec2d" class="javax.swing.JButton" binding="delButton">
+      <component id="eec2d" class="javax.swing.JButton" binding="corlButton">
         <constraints>
           <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="20" height="35"/>
@@ -304,10 +304,10 @@
         </constraints>
         <properties>
           <background color="-589825"/>
-          <text value="←"/>
+          <text value="{"/>
         </properties>
       </component>
-      <component id="f3558" class="javax.swing.JButton" binding="resetButton">
+      <component id="f3558" class="javax.swing.JButton" binding="corrButton">
         <constraints>
           <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="20" height="35"/>
@@ -315,7 +315,7 @@
         </constraints>
         <properties>
           <background color="-589825"/>
-          <text value="Ce"/>
+          <text value="}"/>
         </properties>
       </component>
       <component id="e1fc7" class="javax.swing.JButton" binding="aButton" default-binding="true">
@@ -384,7 +384,8 @@
           <text value="F"/>
         </properties>
       </component>
-      <grid id="cb8d0" binding="pantallaConversor" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="cb8d0" binding="pantallaConversor" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="-1" height="20"/>
@@ -395,18 +396,68 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="6fd11" class="javax.swing.JLabel" binding="tagDecimal">
-            <constraints/>
+          <component id="cae75" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
             <properties>
-              <text value="DECIMAL:"/>
+              <text value="Decimal:"/>
             </properties>
           </component>
-          <component id="3e33f" class="javax.swing.JTextField" binding="pantallaCon">
-            <constraints/>
+          <component id="ac558" class="javax.swing.JLabel" binding="resDecimal">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
             <properties>
-              <background color="-5461074"/>
-              <editable value="true"/>
-              <preferredSize width="500" height="30"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="e1d31" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Octal"/>
+            </properties>
+          </component>
+          <component id="b5c6c" class="javax.swing.JLabel" binding="resOctal">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="b1e3d" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Hexacimal"/>
+            </properties>
+          </component>
+          <component id="ad386" class="javax.swing.JLabel" binding="resHexadecimal">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <component id="19cef" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Binari"/>
+            </properties>
+          </component>
+          <component id="170a1" class="javax.swing.JLabel" binding="resBinari">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
             </properties>
           </component>
         </children>

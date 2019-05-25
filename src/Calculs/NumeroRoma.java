@@ -4,9 +4,29 @@ import java.util.*;
 
 public class NumeroRoma {
     private String operacio;
-    private int resultat;
+    private String resultat;
+    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+
+    static {
+
+        map.put(1000, "M");
+        map.put(900, "CM");
+        map.put(500, "D");
+        map.put(400, "CD");
+        map.put(100, "C");
+        map.put(90, "XC");
+        map.put(50, "L");
+        map.put(40, "XL");
+        map.put(10, "X");
+        map.put(9, "IX");
+        map.put(5, "V");
+        map.put(4, "IV");
+        map.put(1, "I");
+
+    }
 
     public NumeroRoma(String operacio) {
+        int resultatDecimal = 0;
         this.operacio = operacio;
         List<String> signes = aconsegueixSignes(operacio);
         String[] numeros = aconseguiexNumeros(operacio);
@@ -15,10 +35,14 @@ public class NumeroRoma {
         System.out.println(signes);
 
         for (int i = 0; i < numeros.length; i++) {
-            resultat = resultat + convertirRoma(numeros[i]);
+            resultatDecimal = resultatDecimal + convertirRoma(numeros[i]);
         }
-        System.out.println("Resultat total :) " + resultat);
+
+        resultat = toRoman(resultatDecimal);
+
+
     }
+
 
     public static int convertirRoma(String operacio) {
         int resultatConversio = 0;
@@ -60,6 +84,14 @@ public class NumeroRoma {
         return resultatConversio;
     }
 
+    public final static String toRoman(int number) {
+        int l =  map.floorKey(number);
+        if ( number == l ) {
+            return map.get(number);
+        }
+        return map.get(l) + toRoman(number-l);
+    }
+
 
     public static List<String> aconsegueixSignes(String operacio) {
         String regEx = "[\\+\\-\\*\\/]";
@@ -96,11 +128,11 @@ public class NumeroRoma {
         this.operacio = operacio;
     }
 
-    public int getResultat() {
+    public String getResultat() {
         return resultat;
     }
 
-    public void setResultat(int resultat) {
+    public void setResultat(String resultat) {
         this.resultat = resultat;
     }
 }

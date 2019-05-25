@@ -1,11 +1,7 @@
 package Keypads;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import Calculs.Calcul;
 import Calculadora.Calculator;
@@ -43,8 +39,8 @@ public class KeypadNormal extends JPanel {
     private JButton fXButton;
     private JButton parlButton;
     private JButton parrButton;
-    private JButton delButton;
-    private JButton resetButton;
+    private JButton corlButton;
+    private JButton corrButton;
     private String numPantalla;
     public KeypadNormal() {
         numpadBasic = new JPanel();
@@ -280,22 +276,152 @@ public class KeypadNormal extends JPanel {
             }
         });
 
-        delButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                char eliminar = numPantalla.charAt(numPantalla.length() - 1);
-                String eliminarString = Character.toString(eliminar);
-                String stringNou = numPantalla.replaceAll(eliminarString, "");
-                numPantalla = stringNou;
-                jtfOp.setText(stringNou);
-            }
-        });
 
-        resetButton.addActionListener(new ActionListener() {
+        DELButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 numPantalla = "";
                 jtfOp.setText(numPantalla);
+            }
+        });
+
+        xButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "!";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "!";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        lnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "ln";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "ln";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        logButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "log";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "log";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        sinButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "sin";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "sin";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        cosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "cos";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "cos";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        parlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "(";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "(";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        parrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = ")";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += ")";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        EXPButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "exp";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "exp";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        corlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "{";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "{";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        corrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (primeraVegada) {
+                    numPantalla = "}";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "}";
+                    jtfOp.setText(numPantalla);
+                }
             }
         });
 
@@ -413,11 +539,11 @@ public class KeypadNormal extends JPanel {
         return parrButton;
     }
 
-    public JButton getDelButton() {
-        return delButton;
+    public JButton getCorlButton() {
+        return corlButton;
     }
 
-    public JButton getResetButton() {
-        return resetButton;
+    public JButton getCorrButton() {
+        return corrButton;
     }
 }

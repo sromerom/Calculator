@@ -173,6 +173,104 @@ public class KeypadRomans extends JPanel {
             }
         });
 
+        parlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "(";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "(";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        parrButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = ")";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += ")";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        sumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "+";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "+";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        resButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "-";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "-";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        mulButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "*";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "*";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        divButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "/";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "/";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        dotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = ".";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += ".";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
         delButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

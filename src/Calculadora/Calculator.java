@@ -1,15 +1,18 @@
 package Calculadora;
 
 import Keypads.KeypadBase;
+import Keypads.KeypadHistorial;
 import Keypads.KeypadRomans;
 import Keypads.KeypadNormal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class Calculator extends JFrame {
 
@@ -17,6 +20,7 @@ public class Calculator extends JFrame {
     KeypadNormal kn;
     KeypadRomans kr;
     KeypadBase kb;
+    KeypadHistorial kh;
 
     //JPanel principals
     private JPanel total;
@@ -27,11 +31,13 @@ public class Calculator extends JFrame {
     private JTextField pantallaRes;
     private JComboBox tipusOp;
     private JComboBox tipusBase;
+    private JComboBox historial;
     //private JComboBox aux;
     private CardLayout cl;
     public static String opcioElegida;
     public static String opcioBaseElegida;
     private enum tipusOperacions {
+        PER_DEFECTE,
         POLINOMI,
         ROMANS,
         RPN,
@@ -68,12 +74,16 @@ public class Calculator extends JFrame {
         tipusOp.addItem(tipusOperacions.CANVI_UNITATS);
         tipusOp.addItem(tipusOperacions.CANVI_MONETARI);
 
+        historial.addItem("KEYPAD");
+        historial.addItem("HISTORIAL");
+
+
         tipusBase.addItem(enumTipusBase.DECIMAL);
         tipusBase.addItem(enumTipusBase.OCTAL);
         tipusBase.addItem(enumTipusBase.HEXADECIMAL);
         tipusBase.addItem(enumTipusBase.BINARI);
 
-
+        opcioElegida = tipusOperacions.PER_DEFECTE.toString();
         // Accion a realizar cuando el JComboBox cambia de item seleccionado.
         tipusOp.addActionListener(new ActionListener() {
 
@@ -82,8 +92,6 @@ public class Calculator extends JFrame {
 
                 String opcioElegida2 = tipusOp.getSelectedItem().toString();
                 switch (opcioElegida2) {
-                    case "Tipus operacio":
-                        break;
                     case "POLINOMI":
                         cl.show(keypad, KEYPAD_NORMAL);
                         System.out.println("POLINOMI");
@@ -126,7 +134,8 @@ public class Calculator extends JFrame {
                         opcioElegida = opcioElegida2;
                         break;
                     default:
-                        // code block
+                        opcioElegida = tipusOperacions.PER_DEFECTE.toString();
+                        break;
                 }
             }
         });
@@ -163,18 +172,47 @@ public class Calculator extends JFrame {
             }
         });
 
+        historial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String opcioHistorial = historial.getSelectedItem().toString();
+                switch (opcioHistorial) {
+                    case "KEYPAD":
+                        cl.show(keypad, KEYPAD_NORMAL);
+                        System.out.println("DECIMAL");
+                        opcioBaseElegida = opcioHistorial;
+                        break;
+                    case "HISTORIAL":
+                        cl.show(keypad, "KEYPAD_HISTORIAL");
+                        System.out.println("OCTAL");
+                        opcioBaseElegida = opcioHistorial;
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+        });
+
         keypad = new JPanel();
 
         kn = new KeypadNormal(pantallaOp, pantallaRes);
         kr = new KeypadRomans(pantallaOp, pantallaRes);
         kb = new KeypadBase(pantallaOp, pantallaRes);
-
+        try {
+            kh = new KeypadHistorial(pantallaOp, pantallaRes);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         total.add(keypad, BorderLayout.CENTER);
         cl = new CardLayout(0, 0);
         keypad.setLayout(cl);
         keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
         keypad.add(kb.getNumpadBase(), KEYPAD_BASE);
+        keypad.add(kh.getTotalHistorial(), "KEYPAD_HISTORIAL");
 
         /*
         tipusOp.addItemListener(new ItemListener() {
@@ -200,6 +238,8 @@ public class Calculator extends JFrame {
         }
         return valuesSubCombo;
     }
+
+
     public JPanel getTotal() {
         return total;
     }
