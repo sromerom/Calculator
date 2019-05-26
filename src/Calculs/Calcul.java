@@ -12,21 +12,23 @@ import java.util.List;
  *
  * Aquesta classe s'instanciara en els keypads corresponents
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class Calcul {
     private String operacio;
     private String tipusCalcul;
     private int[] numbers;
-    List<String> signes;
+    private List<String> signes;
     private String resultatString = "";
-    String signePolinomi = "";
+    private String signePolinomi = "";
     //private String resultatConversio;
     private int resultatDecimal;
     private String resultatOctal;
     private String resultatHexacimal;
     private String resultatBinari;
-    BufferedWriter bw = null;
-    FileWriter fw = null;
+    private BufferedWriter bw = null;
+    private FileWriter fw = null;
 
     /**
      * Constructor de la classe calcul a on ens permetra saber quin calcul ha elegit l'usuari i executar la corresponent
@@ -171,7 +173,7 @@ public class Calcul {
     /**
      * Metode void que ens permet crear el fitxer a on es guardaran totes les operacions que faci l'usuari.
      * Aquest metode afegira al fitxer cada operació que facem.
-     * @throws Exception
+     * @throws Exception Llançar excepcio per tal d'evitar possibles exceptions del OutputStream
      */
     public void historial() throws Exception {
         String data;

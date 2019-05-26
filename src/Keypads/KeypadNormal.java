@@ -10,11 +10,13 @@ import Calculadora.Calculator;
  * Classe KeypadNormal que ens permet crear un keypadNormal a on es faran tots calculs per defecte per posteriorment
  * carregar-lo en la classe Calculator segons el tipus d'operacio que haguem escollit.
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  *
  */
 public class KeypadNormal extends JPanel {
 
-    boolean primeraVegada = true;
+    private boolean primeraVegada = true;
     private Calcul calcul;
 
     //private String resultat = "";

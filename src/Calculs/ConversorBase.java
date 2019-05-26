@@ -4,6 +4,8 @@ package Calculs;
  * Classe ConversosBase que ens permetra fer conversions entre bases 2, 8 i 16. Segons la base que introdueixi l'usuari
  * es calcular cada un d'aquest incloent binari
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class ConversorBase {
     private int resultatDecimal;

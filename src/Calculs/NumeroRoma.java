@@ -5,6 +5,8 @@ import java.util.*;
 /**
  * La classe NumeroRoma ens permetra fer calculs entre numeros romans.
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class NumeroRoma {
     private String operacio;
@@ -44,7 +46,27 @@ public class NumeroRoma {
         System.out.println(signes);
 
         for (int i = 0; i < numeros.length; i++) {
-            resultatDecimal = resultatDecimal + convertirRoma(numeros[i]);
+            if (signes.get(0).equals("+")) {
+                resultatDecimal = resultatDecimal + convertirRoma(numeros[i]);
+            } else if (signes.get(0).equals("-")){
+                if (i == 0) {
+                    resultatDecimal = convertirRoma(numeros[i]);
+                } else {
+                    resultatDecimal = resultatDecimal - convertirRoma(numeros[i]);
+                }
+            } else if (signes.get(0).equals("*")) {
+                if (i == 0) {
+                    resultatDecimal = convertirRoma(numeros[i]);
+                } else {
+                    resultatDecimal = resultatDecimal * convertirRoma(numeros[i]);
+                }
+            } else if (signes.get(0).equals("/")) {
+                if (i == 0) {
+                    resultatDecimal = convertirRoma(numeros[i]);
+                } else {
+                    resultatDecimal = resultatDecimal / convertirRoma(numeros[i]);
+                }
+            }
         }
 
         resultat = convertirRoma(resultatDecimal);
@@ -104,7 +126,7 @@ public class NumeroRoma {
      * s'utilitzara una vegada tinguem el resultat de l'operacio introduida en decimal i aquest decimal ho volguem tornar
      * a passar a Roma.
      * @param number Parametre int del decimal que volem passar a roma.
-     * @return
+     * @return Retorna un numero Roma
      */
     public final static String convertirRoma(int number) {
         int l =  map.floorKey(number);

@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * Classe Matriu que ens permet calcular matrius, ja sigui fent una suma, una resta o una multipliacio.
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class Matriu {
     private String signeList;
@@ -135,10 +137,10 @@ public class Matriu {
      * @return Retorna la solucio de la suma d'aquestes dos matrius introduides
      */
     public static int[][] sumaMatrius(int[][] matriu1, int[][] matriu2){
-        int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
+        int[][] resultatSumaMatrius = new int[matriu1.length][matriu2[0].length];
 
         for (int i = 0; i < matriu1.length; i++) {
-            for (int j = 0; j < matriu2.length; j++) {
+            for (int j = 0; j < matriu2[0].length; j++) {
                 resultatSumaMatrius[i][j] = matriu1[i][j] + matriu2[i][j];
             }
         }
@@ -153,10 +155,10 @@ public class Matriu {
      * @return Retorna la solucio de la resta d'aquestes dos matrius introduides
      */
     public static int[][] restaMatrius(int[][] matriu1, int[][] matriu2){
-        int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
+        int[][] resultatSumaMatrius = new int[matriu1.length][matriu2[0].length];
 
         for (int i = 0; i < matriu1.length; i++) {
-            for (int j = 0; j < matriu2.length; j++) {
+            for (int j = 0; j < matriu2[0].length; j++) {
                 resultatSumaMatrius[i][j] = matriu1[i][j] - matriu2[i][j];
             }
         }
@@ -169,7 +171,7 @@ public class Matriu {
      * Metode mult que ens permet mulitplicar matrius entre si
      * @param mat1 Parametre d'un array bidimensional de la primera matriu a multiplicar.
      * @param mat2 Parametre d'un array bidimensional de la segona matriu a multiplicar.
-     * @return
+     * @return Retorna la solucio de la multiplicacio d'aquestes dos matrius introduides
      */
     static int[][] mult(int[][] mat1, int[][] mat2) {
         int dimv1 = mat1.length;

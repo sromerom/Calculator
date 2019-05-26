@@ -7,6 +7,8 @@ import java.util.List;
 /**
  * Classe Fraccio que ens permet calcular les operacion a on hagui fraccions
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class Fraccio {
     private List<String> signeList;

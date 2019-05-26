@@ -12,9 +12,11 @@ import java.awt.event.ActionListener;
  * Classe KeypadBase que ens permet crear un keypad dissenyat especificament per l'opcio base 2, 8 i 16. Aquest Keypad
  * es carrega a la classe Calculator.
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class KeypadBase extends JPanel {
-    boolean primeraVegada = true;
+    private boolean primeraVegada = true;
     private JPanel numpadBase;
     private JButton a1Button;
     private JButton a4Button;

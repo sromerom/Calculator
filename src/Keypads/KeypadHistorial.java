@@ -13,19 +13,21 @@ import java.util.Arrays;
  * Classe KeypadHistorial que ens permet veure el resultat de cada operació. Aquestes dades es guardaran inclos una
  * vegada s'ha tancat el programa (Es guarda per sempre i no per sessio). Es carrega a la classe Calculator.
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class KeypadHistorial extends JPanel {
 
     private JPanel totalHistorial;
     private JTable table;
     private JButton actualitzaHistorialButton;
-    String data[][];
-    String col[];
-    DefaultTableModel modelo;
-    File archivo = null;
-    FileReader fr = null;
-    BufferedReader br = null;
-    JScrollPane pane;
+    private String data[][];
+    private String col[];
+    private DefaultTableModel modelo;
+    private File archivo = null;
+    private FileReader fr = null;
+    private BufferedReader br = null;
+    private JScrollPane pane;
 
     /**
      * Constructor KeypadHistorial que ens permet carregar tots els items del keypad i donar funcions a cada un del botons

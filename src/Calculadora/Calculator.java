@@ -15,21 +15,23 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 /**
- * La classe calculator ens un extends d'un JFrame que ens permetra inicialitzar aquest JFrame en un classe apart
- * anomenada CalculatorMain.
+ * La classe Calculator es un extends d'un JFrame que ens permetra inicialitzar aquest JFrame en un classe apart
+ * anomenada Calculadora.CalculatorMain.
  * En aquest JFrame trobarem tot el contingut que du la calculadora com podria ser els JCombobox, Keypads...
- * En aquesta classe també trobarem la logica de cada un dels JCombobox i la carrega de cada un del keypads, ja que
- * aquest es troben en un conjunt de classes.
+ * En aquesta classe també trobarem la logica de cada un dels JCombobox i la carrega de cada un del keypads, ja que en
+ * aquests es troben en classes diferents.
  *
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class Calculator extends JFrame {
 
     //Keypads a carregar
-    KeypadNormal kn;
-    KeypadRomans kr;
-    KeypadBase kb;
-    KeypadHistorial kh;
+    private KeypadNormal kn;
+    private KeypadRomans kr;
+    private KeypadBase kb;
+    private KeypadHistorial kh;
 
     //JPanel principals
     private JPanel total;
@@ -41,12 +43,16 @@ public class Calculator extends JFrame {
     private JComboBox tipusOp;
     private JComboBox tipusBase;
     private JComboBox historial;
-    //private JComboBox aux;
     private CardLayout cl;
+    /**
+     * Variable static per poder comunicar el tipus de operacio elegida cap altres classes
+     */
     public static String opcioElegida;
+    /**
+     * Variable static per poder comunicar el tipus de operacio base (decimal, octal, hexadecimal, binari) cap altres
+     * classes
+     */
     public static String opcioBaseElegida;
-
-
     private enum tipusOperacions {
         PER_DEFECTE,
         POLINOMI,
@@ -66,15 +72,45 @@ public class Calculator extends JFrame {
         BINARI
     }
 
+    /**
+     * Final static per assignar quin tipus de keypad es al hora de afegir al JPanel, en aquest cas es per el
+     * KEYPADNORMAL
+     */
     final static String KEYPAD_NORMAL = "Keypad per defecte";
+    /**
+     * Final static per assignar quin tipus de keypad es al hora de afegir al JPanel, en aquest cas es per el
+     * KEYPAD_ROMANS
+     */
     final static String KEYPAD_ROMANS = "Keypad per operacions amb numeros romans";
+    /**
+     * Final static per assignar quin tipus de keypad es al hora de afegir al JPanel, en aquest cas es per el
+     * KEYPAD_BASE
+     */
     final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
+    /**
+     * Final static per assignar quin tipus de keypad es al hora de afegir al JPanel, en aquest cas es per el
+     * KEYPAD_NORMAL
+     */
+    final static String KEYPAD_HISTORIAL = "Keypad per consultar les operacions que hem estat fent al llarg del temps)";
 
     /**
      * Constructor de la classe Calculator que ens permet carregar tot el contingut que trobarem a la calculadora. En
      * aquest constructor tambe carregarem les opcions de cada un dels JComboBox(tipus Base, tipus operacio i el
-     * historial) i instanciarem cada un dels keypads per poder utilitzar-los segons el value actual del JComboBox en
-     * concret
+     * historial).
+     *
+     * JComboBox de tipus operacio ens permetra canviar entre keypad i operacio a fer segons la opcio elegida. Si
+     * canviam a "ROMANS" podrem canviar el keypad a un de personalitzat i la calculadora es posara en mode
+     * "Calcular Romans".
+     *
+     * Si el JComboBox es de tipus base ens permetra canviar entre keypad i tambe convertir numeros entre qualsevol
+     * base, segons la opcio elegida. Si canviam a "OCTAL" podrem canviar el keypad a un de personalitzat i la
+     * calculadora es posara en mode "Calcular OCTAL".
+     *
+     * I si el JCombobox es de tipus historial ens carregara una nova finestra dissenyada exclusivament per consultar
+     * el historial del nostres calculs. Podrem estar canviant entre aquesta finestra y el keypad.
+     *
+     * Per poder fer aixo tambe instanciara cada un dels keypads per poder utilitzar-los segons el value actual del
+     * JComboBox en concret
      */
     public Calculator() {
         tipusOp.setUI(new BasicComboBoxUI());
@@ -102,14 +138,8 @@ public class Calculator extends JFrame {
 
         opcioElegida = tipusOperacions.PER_DEFECTE.toString();
 
-        tipusOp.addActionListener(new ActionListener() {
 
-            /**
-             * Action Performed per el JComboBox de tipus operacio que ens permetra canviar entre keypad i operacio a fer
-             * segons la opcio elegida. Si canviam a "ROMANS" podrem canviar el keypad a un de personalitzat i la
-             * calculadora es posara en mode "Calcular Romans".
-             * @param e Parametre Action Performed JComboBox tipusOp
-             */
+        tipusOp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -163,14 +193,7 @@ public class Calculator extends JFrame {
             }
         });
 
-
         tipusBase.addActionListener(new ActionListener() {
-            /**
-             * Action Performed per el JComboBox de tipus base que ens permetra canviar entre keypad i tambe convertir
-             * numeros entre qualsevol base, segons la opcio elegida. Si canviam a "OCTAL" podrem canviar el keypad a un
-             * de personalitzat i la calculadora es posara en mode "Calcular OCTAL".
-             * @param e Parametre Action Performed JComboBox tipusBase
-             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcioElegidaBase2 = tipusBase.getSelectedItem().toString();
@@ -202,12 +225,6 @@ public class Calculator extends JFrame {
         });
 
         historial.addActionListener(new ActionListener() {
-            /**
-             * Action performed que ens carregara una nova finestra especialitzada nomes dissenyada per consultar el
-             * historial. Podrem estar canviant entre aquesta finestra y el keypad.
-             *
-             * @param e Parametre Action Performed JComboBox historial
-             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcioHistorial = historial.getSelectedItem().toString();
@@ -218,7 +235,7 @@ public class Calculator extends JFrame {
                         opcioBaseElegida = opcioHistorial;
                         break;
                     case "HISTORIAL":
-                        cl.show(keypad, "KEYPAD_HISTORIAL");
+                        cl.show(keypad, KEYPAD_HISTORIAL);
                         System.out.println("OCTAL");
                         opcioBaseElegida = opcioHistorial;
                         break;
@@ -241,32 +258,11 @@ public class Calculator extends JFrame {
         keypad.add(kn.getNumpadBasic(), KEYPAD_NORMAL);
         keypad.add(kr.getNumpadRomans(), KEYPAD_ROMANS);
         keypad.add(kb.getNumpadBase(), KEYPAD_BASE);
-        keypad.add(kh.getTotalHistorial(), "KEYPAD_HISTORIAL");
+        keypad.add(kh.getTotalHistorial(), KEYPAD_HISTORIAL);
 
-        /*
-        tipusOp.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    if (tipusOp.getSelectedIndex() > 0) {
-                        aux.setModel(new DefaultComboBoxModel(addItemsSubcombobox(tipusOp.getSelectedItem().toString())));
-                    }
-                }
-            }
-        });
-        */
 
     }
 
-    public String[] addItemsSubcombobox(String tipusOpcioString) {
-        String[] valuesSubCombo = new String[3];
-        if (tipusOpcioString.equals("POLINOMI")) {
-            valuesSubCombo[0] = "Suma";
-            valuesSubCombo[1] = "Resta";
-            valuesSubCombo[2] = "Multiplicacio";
-        }
-        return valuesSubCombo;
-    }
 
 
     /**

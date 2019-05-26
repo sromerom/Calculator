@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
  * Classe KeypadRomans que ens permet dissenyar un keypad totalment diferent especialitzat només quan utilitzem el tipus
  * d'operacio "ROMANS". Aquest keypad com tots els altres es carregaran a la classe Calculator (Instancia).
  * @author Samuel Romero Marín
+ * @version 0.7.0
+ * @since 0.7.0
  */
 public class KeypadRomans extends JPanel {
     private JPanel numpadRomans;
@@ -34,10 +36,15 @@ public class KeypadRomans extends JPanel {
     private JButton parrButton;
     private JButton delButton;
     private JButton resetButton;
+    private JButton xButton;
+    private JButton lButton;
+    private JButton cButton;
+    private JButton dButton;
+    private JButton mButton;
 
     private Calcul calcul;
     private String numPantalla;
-    boolean primeraVegada = true;
+    private boolean primeraVegada = true;
 
     /**
      * Constructor KeypadRomans que ens permet carregar tots els items del keypad i donar funcions a cada un del botons
@@ -277,6 +284,76 @@ public class KeypadRomans extends JPanel {
                     jtfOp.setText(numPantalla);
                 } else {
                     numPantalla += ".";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        xButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "X";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "X";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        lButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "L";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "L";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        cButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "C";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "C";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        dButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "D";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "D";
+                    jtfOp.setText(numPantalla);
+                }
+            }
+        });
+
+        mButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (primeraVegada) {
+                    numPantalla = "M";
+                    primeraVegada = false;
+                    jtfOp.setText(numPantalla);
+                } else {
+                    numPantalla += "M";
                     jtfOp.setText(numPantalla);
                 }
             }
