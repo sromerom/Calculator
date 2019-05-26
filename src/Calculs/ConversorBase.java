@@ -1,11 +1,22 @@
 package Calculs;
 
+/**
+ * Classe ConversosBase que ens permetra fer conversions entre bases 2, 8 i 16. Segons la base que introdueixi l'usuari
+ * es calcular cada un d'aquest incloent binari
+ * @author Samuel Romero Marín
+ */
 public class ConversorBase {
     private int resultatDecimal;
     private String resultatOctal;
     private String resultatHexacimal;
     private String resultatBinari;
 
+    /**
+     * Constructor de ConversorBase que segons una operacio i un tipus d'operacio fara les respectives conversions. Cada
+     * canvi de tipus d'operació s'haura de variar el resultat.
+     * @param operacio Parametre de l'operacio que introduiex l'usuari
+     * @param tipusOp Parametre del tipus operacio de base que introduiex l'usuari
+     */
     public ConversorBase(String operacio, String tipusOp) {
 
         if (tipusOp.equals("OCTAL")) {
@@ -18,7 +29,6 @@ public class ConversorBase {
             }
 
             //Aplicam formula per tal de aconseguir el tamany en format decimal
-            //EX: 3050 = (3 × 8³) + (0 × 8²) + (5 × 8¹) + (0 × 8⁰) = 1576
             int enrere = resultatArray.length - 1;
             for (int e = 0; e < resultatArray.length; e++, enrere--) {
                 int actual = resultatArray[e];
@@ -50,35 +60,39 @@ public class ConversorBase {
 
     }
 
+    /**
+     * Metode getter per aconseguir el resultat en decimal que ha fet el constructor.
+     * @return Retorna el resultat calculat en decimal.
+     */
     public int getResultatDecimal() {
         return resultatDecimal;
     }
 
-    public void setResultatDecimal(int resultatDecimal) {
-        this.resultatDecimal = resultatDecimal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en octal que ha fet el constructor.
+     * @return Retorna el resultat calculat en octal.
+     */
     public String getResultatOctal() {
         return resultatOctal;
     }
 
-    public void setResultatOctal(String resultatOctal) {
-        this.resultatOctal = resultatOctal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en hexadecimal que ha fet el constructor.
+     * @return Retorna el resultat calculat en hexadecimal.
+     */
     public String getResultatHexacimal() {
         return resultatHexacimal;
     }
 
-    public void setResultatHexacimal(String resultatHexacimal) {
-        this.resultatHexacimal = resultatHexacimal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en binari que ha fet el constructor.
+     * @return Retorna el resultat calculat en binari.
+     */
     public String getResultatBinari() {
         return resultatBinari;
     }
 
-    public void setResultatBinari(String resultatBinari) {
-        this.resultatBinari = resultatBinari;
-    }
 }

@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe KeypadRomans que ens permet dissenyar un keypad totalment diferent especialitzat només quan utilitzem el tipus
+ * d'operacio "ROMANS". Aquest keypad com tots els altres es carregaran a la classe Calculator (Instancia).
+ * @author Samuel Romero Marín
+ */
 public class KeypadRomans extends JPanel {
     private JPanel numpadRomans;
     private JButton iButton;
@@ -34,6 +39,12 @@ public class KeypadRomans extends JPanel {
     private String numPantalla;
     boolean primeraVegada = true;
 
+    /**
+     * Constructor KeypadRomans que ens permet carregar tots els items del keypad i donar funcions a cada un del botons
+     * d'aquest keypad.
+     * @param jtfOp Parametre JTextField del input on s'ingressa l'operacio a calcular de la classe Calculator.
+     * @param jtfRes Parametre JtextField del input on es retorna el resultat que s'ha calculat la classe Calulcator.
+     */
     public KeypadRomans(JTextField jtfOp, JTextField jtfRes) {
         eqButton.addActionListener(new ActionListener() {
             @Override

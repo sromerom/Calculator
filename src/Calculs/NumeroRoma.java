@@ -2,10 +2,14 @@ package Calculs;
 
 import java.util.*;
 
+/**
+ * La classe NumeroRoma ens permetra fer calculs entre numeros romans.
+ * @author Samuel Romero Marín
+ */
 public class NumeroRoma {
     private String operacio;
     private String resultat;
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    private final static TreeMap<Integer, String> map = new TreeMap<>();
 
     static {
 
@@ -25,6 +29,11 @@ public class NumeroRoma {
 
     }
 
+    /**
+     * Constructor de la classe NumeroRoma que ens permetra calcular entre numeros romans fer servint els metodes de
+     * calcul.
+     * @param operacio Parametre String que li passem amb l'operacio amb numeros romans
+     */
     public NumeroRoma(String operacio) {
         int resultatDecimal = 0;
         this.operacio = operacio;
@@ -38,12 +47,18 @@ public class NumeroRoma {
             resultatDecimal = resultatDecimal + convertirRoma(numeros[i]);
         }
 
-        resultat = toRoman(resultatDecimal);
+        resultat = convertirRoma(resultatDecimal);
 
 
     }
 
 
+    /**
+     * Metode que ens permet passar d'un numero decimal o arabic a roma. No nomes això si no que tambe ens permet passar
+     * d'una operacio que li passem con a parametre fins arribar a un numero decimal.
+     * @param operacio Parametre String que li passem amb l'operacio que s'ha introduit.
+     * @return Retorna el resultat en numero arabic o decimal de l'operacio que s'ha introduit.
+     */
     public static int convertirRoma(String operacio) {
         int resultatConversio = 0;
         int anteriorNumero = 0;
@@ -84,15 +99,28 @@ public class NumeroRoma {
         return resultatConversio;
     }
 
-    public final static String toRoman(int number) {
+    /**
+     * Metode convertirRoma que ens permet passar d'un numero arabic o decimal a un numero roma. Aquest metode
+     * s'utilitzara una vegada tinguem el resultat de l'operacio introduida en decimal i aquest decimal ho volguem tornar
+     * a passar a Roma.
+     * @param number Parametre int del decimal que volem passar a roma.
+     * @return
+     */
+    public final static String convertirRoma(int number) {
         int l =  map.floorKey(number);
         if ( number == l ) {
             return map.get(number);
         }
-        return map.get(l) + toRoman(number-l);
+        return map.get(l) + convertirRoma(number-l);
     }
 
 
+    /**
+     * Metode aconsguiexSignes que ens permet aconsguir els signes del string que ens passa l'usuari (operacio). Metode
+     * molt parescut al "separa()" de la classe Calcul.
+     * @param operacio Parametre String amb l'operacio que volem separar.
+     * @return Retorna els signes de l'actual operacio que ha introduit l'usuari.
+     */
     public static List<String> aconsegueixSignes(String operacio) {
         String regEx = "[\\+\\-\\*\\/]";
         String split[] = operacio.split(regEx);
@@ -108,6 +136,12 @@ public class NumeroRoma {
         return signes;
     }
 
+    /**
+     * Metode aconseguiexNumeros que ens permet aconsguir el numeros a partir d'un string. Metode molt parescut al
+     * "separa()" de la classe Calcul.
+     * @param operacio Parametre String amb l'operacio que volem separar.
+     * @return Retorna els numeros de l'actual operacio que ha introduit l'usuari.
+     */
     public static String[] aconseguiexNumeros(String operacio) {
         String regEx = "[\\+\\-\\*\\/]";
         String split[] = operacio.split(regEx);
@@ -120,21 +154,15 @@ public class NumeroRoma {
         return numbers;
     }
 
-    public String getOperacio() {
-        return operacio;
-    }
 
-    public void setOperacio(String operacio) {
-        this.operacio = operacio;
-    }
-
+    /**
+     * Metode getter que ens permet aconseguir el resultat que en ha donat
+     * @return Retorna el valor de la variable resultat amb el resultat del calcul.
+     */
     public String getResultat() {
         return resultat;
     }
 
-    public void setResultat(String resultat) {
-        this.resultat = resultat;
-    }
 }
 
 

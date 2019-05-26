@@ -1,17 +1,19 @@
 package Keypads;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+/**
+ * Classe KeypadHistorial que ens permet veure el resultat de cada operació. Aquestes dades es guardaran inclos una
+ * vegada s'ha tancat el programa (Es guarda per sempre i no per sessio). Es carrega a la classe Calculator.
+ * @author Samuel Romero Marín
+ */
 public class KeypadHistorial extends JPanel {
 
     private JPanel totalHistorial;
@@ -25,7 +27,13 @@ public class KeypadHistorial extends JPanel {
     BufferedReader br = null;
     JScrollPane pane;
 
-    public KeypadHistorial(JTextField jtfOp, JTextField jtfRes) throws BadLocationException, FileNotFoundException {
+    /**
+     * Constructor KeypadHistorial que ens permet carregar tots els items del keypad i donar funcions a cada un del botons
+     * d'aquest keypad.
+     * @param jtfOp Parametre JTextField del input on s'ingressa l'operacio a calcular de la classe Calculator.
+     * @param jtfRes Parametre JtextField del input on es retorna el resultat que s'ha calculat la classe Calulcator.
+     */
+    public KeypadHistorial(JTextField jtfOp, JTextField jtfRes){
         totalHistorial = new JPanel();
 
         modelo = new DefaultTableModel();
@@ -44,8 +52,6 @@ public class KeypadHistorial extends JPanel {
         actualitzaHistorialButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Apertura del fichero y creacion de BufferedReader para poder
-                // hacer una lectura comoda (disponer del metodo readLine()).
 
                 try {
                     archivo = new File("C:\\Users\\Samuel Romero Marín\\Desktop\\historialCalc.txt");
@@ -75,9 +81,6 @@ public class KeypadHistorial extends JPanel {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 } finally {
-                    // En el finally cerramos el fichero, para asegurarnos
-                    // que se cierra tanto si todo va bien como si salta
-                    // una excepcion.
                     try {
                         if (null != fr) {
                             fr.close();
@@ -90,6 +93,10 @@ public class KeypadHistorial extends JPanel {
         });
     }
 
+    /**
+     * Metode void LimpiarjTable que ens permetra netetjar totes les files de la taula del historial cada vegada que
+     * actualitzem les dades
+     */
     void LimpiarJTable() {
         int a = modelo.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -97,11 +104,13 @@ public class KeypadHistorial extends JPanel {
         }
     }
 
+    /**
+     * Metode getter que ens permet aconsguir el JPanel amb tots els items corresponents per posteriorment carregar-ho
+     * a la Classe Calculator
+     * @return Retorna un JPanel de tot el keypadHistorial
+     */
     public JPanel getTotalHistorial() {
         return totalHistorial;
     }
 
-    public void setTotalHistorial(JPanel totalHistorial) {
-        this.totalHistorial = totalHistorial;
-    }
 }

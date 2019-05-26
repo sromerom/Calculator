@@ -8,7 +8,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KeypadBase extends JPanel{
+/**
+ * Classe KeypadBase que ens permet crear un keypad dissenyat especificament per l'opcio base 2, 8 i 16. Aquest Keypad
+ * es carrega a la classe Calculator.
+ * @author Samuel Romero Marín
+ */
+public class KeypadBase extends JPanel {
     boolean primeraVegada = true;
     private JPanel numpadBase;
     private JButton a1Button;
@@ -53,6 +58,13 @@ public class KeypadBase extends JPanel{
     private JTextField pantallaCon;
     private Calcul calcul;
     private String numPantalla;
+
+    /**
+     * Constructor KeypadBase que ens permet carregar tots els items del keypadbase i donar funcions a cada un del botons
+     * d'aquest keypad.
+     * @param jtfOp Parametre JTextField del input on s'ingressa l'operacio a calcular de la classe Calculator.
+     * @param jtfRes Parametre JtextField del input on es retorna el resultat que s'ha calculat la classe Calulcator.
+     */
     public KeypadBase(JTextField jtfOp, JTextField jtfRes) {
 
         eqButton.addActionListener(new ActionListener() {
@@ -522,11 +534,13 @@ public class KeypadBase extends JPanel{
         });
     }
 
+    /**
+     * Metode getter per aconseguir el JPanel principal a on es troben tots els item d'aquest keypad per tal de
+     * carregar-ho a la classe Calculator.
+     * @return Retorna un JPanel amb tots els items corresponents a aquest keypadbase.
+     */
     public JPanel getNumpadBase() {
         return numpadBase;
     }
 
-    public void setNumpadBase(JPanel numpadBase) {
-        this.numpadBase = numpadBase;
-    }
 }

@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Classe Fraccio que ens permet calcular les operacion a on hagui fraccions
+ * @author Samuel Romero Marín
+ */
 public class Fraccio {
     private List<String> signeList;
     private String resultat;
 
+    /**
+     * Constructor de Fraccio a on separarem els signes del numeros i calcularem segons el signe aconsguit la fraccio
+     * corresponent i es donara el resultat
+     * @param operacio Parametre String de l'operacio que introduiex l'usuari amb les fraccions a calcular.
+     */
     public Fraccio(String operacio) {
         String parts[] = operacio.split("\\|");
         List<Integer> numeradors = new ArrayList<>();
@@ -85,6 +94,13 @@ public class Fraccio {
 
     }
 
+    /**
+     * Metode senzill per calcular el mcm de dos numeros, en aquest cas per calcular el mcm del denominadors en el cas
+     * que no siguin iguals
+     * @param den1 Parametre int del primer denominador
+     * @param den2 Parametre int del segon denominador
+     * @return Retorna el resultat del minim comu multiple dels dos numeros introduits
+     */
     public static int mcm(int den1, int den2) {
         int mcm = 1;
         int i = 2;
@@ -101,6 +117,13 @@ public class Fraccio {
         return mcm;
     }
 
+    /**
+     * Metode void que ens permet prepapar la següent passa del calcul i que consisteix en separar el numeradors i
+     * denominadors en dos llistes diferents.
+     * @param operacioArray Parametre a on estan tots els numeros a separar
+     * @param numeradors Paramaetre List que ens permetra anar guardant tots els numeradors en ella
+     * @param denominadors Paramaetre List que ens permetra anar guardant tots els denominadors en ella
+     */
     public void preparaFraccio(String[] operacioArray, List numeradors, List denominadors) {
         String operacioArrayString = "";
 
@@ -120,17 +143,12 @@ public class Fraccio {
         }
     }
 
+    /**
+     * Metode getter que ens serveir per aconseguir el resultat total de les fraccions
+     * @return Retorna el resultat entre les fraccions introduides
+     */
     public String getResultat() {
         return resultat;
     }
 
-    public void setResultat(String resultat) {
-        this.resultat = resultat;
-    }
-
-    static class main {
-        public static void main(String[] args) {
-            Fraccio c = new Fraccio("2/3 |+| 5/3 |+| 8/3");
-        }
-    }
 }

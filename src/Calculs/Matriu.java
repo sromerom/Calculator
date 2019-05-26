@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Classe Matriu que ens permet calcular matrius, ja sigui fent una suma, una resta o una multipliacio.
+ * @author Samuel Romero Marín
+ */
 public class Matriu {
     private String signeList;
     private int [][] resultat;
 
+    /**
+     * Constructor de la classe Matriu que el que fara principialment es preparar operacio introduida per posteriorment
+     * cridar als corresponent metode de l'operacio en concret.
+     * @param operacio Parametre operacio a on es troban tota la operacio a calcular entre matrius.
+     */
     public Matriu(String operacio) {
         List<String> resultatList = new ArrayList<>();
         String[] split = operacio.split("\\|");
@@ -109,7 +118,7 @@ public class Matriu {
         if (signeList.equals("+")) {
             resultat = sumaMatrius(matriu1, matriu2);
         } else if (signeList.equals("-")) {
-
+            resultat = restaMatrius(matriu1, matriu2) ;
         } else if (signeList.equals("*")) {
             resultat = mult(matriu1, matriu2);
         }
@@ -119,6 +128,12 @@ public class Matriu {
 
     }
 
+    /**
+     * Metode sumaMatrius que ens permetra sumar matrius.
+     * @param matriu1 Parametre d'un array bidimensional de la primera matriu a sumar.
+     * @param matriu2 Parametre d'un array bidimensional de la segona matriu a sumar.
+     * @return Retorna la solucio de la suma d'aquestes dos matrius introduides
+     */
     public static int[][] sumaMatrius(int[][] matriu1, int[][] matriu2){
         int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
 
@@ -131,6 +146,12 @@ public class Matriu {
         return resultatSumaMatrius;
     }
 
+    /**
+     * Metode restaMatrius que ens permet restar matrius entre si
+     * @param matriu1 Parametre d'un array bidimensional de la primera matriu a restar.
+     * @param matriu2 Parametre d'un array bidimensional de la segona matriu a restar.
+     * @return Retorna la solucio de la resta d'aquestes dos matrius introduides
+     */
     public static int[][] restaMatrius(int[][] matriu1, int[][] matriu2){
         int[][] resultatSumaMatrius = new int[matriu1.length][matriu2.length];
 
@@ -144,6 +165,12 @@ public class Matriu {
     }
 
 
+    /**
+     * Metode mult que ens permet mulitplicar matrius entre si
+     * @param mat1 Parametre d'un array bidimensional de la primera matriu a multiplicar.
+     * @param mat2 Parametre d'un array bidimensional de la segona matriu a multiplicar.
+     * @return
+     */
     static int[][] mult(int[][] mat1, int[][] mat2) {
         int dimv1 = mat1.length;
         int dimh1 = mat1[0].length;
@@ -172,21 +199,12 @@ public class Matriu {
         return result;
     }
 
+    /**
+     * Metode getter que ens permet aconseguir el valor actual del resultat
+     * @return Retorna el resultat del calcul que s'ha fet anteriorment
+     */
     public int[][] getResultat() {
         return resultat;
     }
 
-    public void setResultat(int[][] resultat) {
-        this.resultat = resultat;
-    }
-
-    static class main {
-        public static void main(String[] args) {
-            Matriu c = new Matriu("{{1, 2}{3, 4}} |+| {{1, 2}{3, 4}}");
-
-            //2 --> 1 = 2
-            //3 --> 2 = 3
-            //4 --> 3 = 4
-        }
-    }
 }

@@ -14,6 +14,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+/**
+ * La classe calculator ens un extends d'un JFrame que ens permetra inicialitzar aquest JFrame en un classe apart
+ * anomenada CalculatorMain.
+ * En aquest JFrame trobarem tot el contingut que du la calculadora com podria ser els JCombobox, Keypads...
+ * En aquesta classe també trobarem la logica de cada un dels JCombobox i la carrega de cada un del keypads, ja que
+ * aquest es troben en un conjunt de classes.
+ *
+ * @author Samuel Romero Marín
+ */
 public class Calculator extends JFrame {
 
     //Keypads a carregar
@@ -36,6 +45,8 @@ public class Calculator extends JFrame {
     private CardLayout cl;
     public static String opcioElegida;
     public static String opcioBaseElegida;
+
+
     private enum tipusOperacions {
         PER_DEFECTE,
         POLINOMI,
@@ -59,11 +70,17 @@ public class Calculator extends JFrame {
     final static String KEYPAD_ROMANS = "Keypad per operacions amb numeros romans";
     final static String KEYPAD_BASE = "Keypad per operacions amb diferent base (decimal, octal, hexacimal)";
 
+    /**
+     * Constructor de la classe Calculator que ens permet carregar tot el contingut que trobarem a la calculadora. En
+     * aquest constructor tambe carregarem les opcions de cada un dels JComboBox(tipus Base, tipus operacio i el
+     * historial) i instanciarem cada un dels keypads per poder utilitzar-los segons el value actual del JComboBox en
+     * concret
+     */
     public Calculator() {
         tipusOp.setUI(new BasicComboBoxUI());
         tipusBase.setUI(new BasicComboBoxUI());
-        pantallaRes.setBorder(new EmptyBorder(0,0,0,0));
-        pantallaOp.setBorder(new EmptyBorder(0,0,0,0));
+        pantallaRes.setBorder(new EmptyBorder(0, 0, 0, 0));
+        pantallaOp.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         tipusOp.addItem(tipusOperacions.POLINOMI);
         tipusOp.addItem(tipusOperacions.ROMANS);
@@ -84,9 +101,15 @@ public class Calculator extends JFrame {
         tipusBase.addItem(enumTipusBase.BINARI);
 
         opcioElegida = tipusOperacions.PER_DEFECTE.toString();
-        // Accion a realizar cuando el JComboBox cambia de item seleccionado.
+
         tipusOp.addActionListener(new ActionListener() {
 
+            /**
+             * Action Performed per el JComboBox de tipus operacio que ens permetra canviar entre keypad i operacio a fer
+             * segons la opcio elegida. Si canviam a "ROMANS" podrem canviar el keypad a un de personalitzat i la
+             * calculadora es posara en mode "Calcular Romans".
+             * @param e Parametre Action Performed JComboBox tipusOp
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -142,6 +165,12 @@ public class Calculator extends JFrame {
 
 
         tipusBase.addActionListener(new ActionListener() {
+            /**
+             * Action Performed per el JComboBox de tipus base que ens permetra canviar entre keypad i tambe convertir
+             * numeros entre qualsevol base, segons la opcio elegida. Si canviam a "OCTAL" podrem canviar el keypad a un
+             * de personalitzat i la calculadora es posara en mode "Calcular OCTAL".
+             * @param e Parametre Action Performed JComboBox tipusBase
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcioElegidaBase2 = tipusBase.getSelectedItem().toString();
@@ -173,6 +202,12 @@ public class Calculator extends JFrame {
         });
 
         historial.addActionListener(new ActionListener() {
+            /**
+             * Action performed que ens carregara una nova finestra especialitzada nomes dissenyada per consultar el
+             * historial. Podrem estar canviant entre aquesta finestra y el keypad.
+             *
+             * @param e Parametre Action Performed JComboBox historial
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcioHistorial = historial.getSelectedItem().toString();
@@ -199,13 +234,7 @@ public class Calculator extends JFrame {
         kn = new KeypadNormal(pantallaOp, pantallaRes);
         kr = new KeypadRomans(pantallaOp, pantallaRes);
         kb = new KeypadBase(pantallaOp, pantallaRes);
-        try {
-            kh = new KeypadHistorial(pantallaOp, pantallaRes);
-        } catch (BadLocationException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        kh = new KeypadHistorial(pantallaOp, pantallaRes);
         total.add(keypad, BorderLayout.CENTER);
         cl = new CardLayout(0, 0);
         keypad.setLayout(cl);
@@ -229,8 +258,8 @@ public class Calculator extends JFrame {
 
     }
 
-    public String [] addItemsSubcombobox(String tipusOpcioString) {
-        String [] valuesSubCombo = new String[3];
+    public String[] addItemsSubcombobox(String tipusOpcioString) {
+        String[] valuesSubCombo = new String[3];
         if (tipusOpcioString.equals("POLINOMI")) {
             valuesSubCombo[0] = "Suma";
             valuesSubCombo[1] = "Resta";
@@ -240,12 +269,13 @@ public class Calculator extends JFrame {
     }
 
 
+    /**
+     * Metode getter per aconseguir el JPanel que te el contingut de la calculadora
+     * @return Retorna el JPanel "Total"
+     */
     public JPanel getTotal() {
         return total;
     }
 
-    public void setTotal(JPanel total) {
-        this.total = total;
-    }
 }
 

@@ -6,6 +6,12 @@ import java.awt.event.ActionListener;
 import Calculs.Calcul;
 import Calculadora.Calculator;
 
+/**
+ * Classe KeypadNormal que ens permet crear un keypadNormal a on es faran tots calculs per defecte per posteriorment
+ * carregar-lo en la classe Calculator segons el tipus d'operacio que haguem escollit.
+ * @author Samuel Romero Marín
+ *
+ */
 public class KeypadNormal extends JPanel {
 
     boolean primeraVegada = true;
@@ -42,10 +48,13 @@ public class KeypadNormal extends JPanel {
     private JButton corlButton;
     private JButton corrButton;
     private String numPantalla;
-    public KeypadNormal() {
-        numpadBasic = new JPanel();
-    }
 
+    /**
+     * Constructor KeypadNormal que ens permet carregar tots els items del keypad i donar funcions a cada un del botons
+     * d'aquest keypad.
+     * @param jtfOp Parametre JTextField del input on s'ingressa l'operacio a calcular de la classe Calculator.
+     * @param jtfRes Parametre JtextField del input on es retorna el resultat que s'ha calculat la classe Calulcator.
+     */
     public KeypadNormal(JTextField jtfOp, JTextField jtfRes) {
 
 
@@ -431,119 +440,4 @@ public class KeypadNormal extends JPanel {
         return numpadBasic;
     }
 
-    public void setNumpadBasic(JPanel numpadBasic) {
-        this.numpadBasic = numpadBasic;
-    }
-
-    public JButton getA1Button() {
-        return a1Button;
-    }
-
-    public JButton getA4Button() {
-        return a4Button;
-    }
-
-    public JButton getA7Button() {
-        return a7Button;
-    }
-
-    public JButton getA0Button() {
-        return a0Button;
-    }
-
-    public JButton getA2Button() {
-        return a2Button;
-    }
-
-    public JButton getA5Button() {
-        return a5Button;
-    }
-
-    public JButton getA8Button() {
-        return a8Button;
-    }
-
-    public JButton getDotButton() {
-        return dotButton;
-    }
-
-    public JButton getEqButton() {
-        return eqButton;
-    }
-
-    public JButton getA9Button() {
-        return a9Button;
-    }
-
-    public JButton getA6Button() {
-        return a6Button;
-    }
-
-    public JButton getA3Button() {
-        return a3Button;
-    }
-
-    public JButton getEXPButton() {
-        return EXPButton;
-    }
-
-    public JButton getMulButton() {
-        return mulButton;
-    }
-
-    public JButton getSumButton() {
-        return sumButton;
-    }
-
-    public JButton getSinButton() {
-        return sinButton;
-    }
-
-    public JButton getCosButton() {
-        return cosButton;
-    }
-
-    public JButton getResButton() {
-        return resButton;
-    }
-
-    public JButton getDivButton() {
-        return divButton;
-    }
-
-    public JButton getDELButton() {
-        return DELButton;
-    }
-
-    public JButton getxButton() {
-        return xButton;
-    }
-
-    public JButton getLnButton() {
-        return lnButton;
-    }
-
-    public JButton getLogButton() {
-        return logButton;
-    }
-
-    public JButton getfXButton() {
-        return fXButton;
-    }
-
-    public JButton getParlButton() {
-        return parlButton;
-    }
-
-    public JButton getParrButton() {
-        return parrButton;
-    }
-
-    public JButton getCorlButton() {
-        return corlButton;
-    }
-
-    public JButton getCorrButton() {
-        return corrButton;
-    }
 }

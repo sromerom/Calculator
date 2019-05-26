@@ -1,14 +1,18 @@
 package Calculs;
-
-import Calculadora.Calculator;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * La classe Calcul ens permetra fer tota la logica respecte als calculs que es podran fer en la calculadora. Segons
+ * els tipus de calcul elegit en els JComboBox anterior es fara una operacio o una altra. En cada tipus de calcul podrem
+ * instanciar el tipus de operacio en concret o simplement no fer-ho.
+ *
+ * Aquesta classe s'instanciara en els keypads corresponents
+ * @author Samuel Romero Marín
+ */
 public class Calcul {
     private String operacio;
     private String tipusCalcul;
@@ -24,18 +28,20 @@ public class Calcul {
     BufferedWriter bw = null;
     FileWriter fw = null;
 
+    /**
+     * Constructor de la classe calcul a on ens permetra saber quin calcul ha elegit l'usuari i executar la corresponent
+     * logica
+     * @param operacio Parametre String a on l'usuari ha introduit l'operacio a calcular
+     * @param tipusCalcul Parametre String del tipus de calcul que ha elegit l'usuari
+     */
     public Calcul(String operacio, String tipusCalcul) {
         this.operacio = operacio;
         this.tipusCalcul = tipusCalcul;
 
         switch (tipusCalcul) {
             case "POLINOMI":
-                System.out.println("Funciona POLINOMI");
 
                 Polynomial[] resultat = calculPolinomi(operacio);
-                //System.out.println("signoooooooooooo" + signePolinomi);
-                //System.out.println(resultat[0].add(resultat[1]).toString());
-
                 for (int i = 0; i < resultat.length; i++) {
                     if (i == 0) {
                         continue;
@@ -61,16 +67,12 @@ public class Calcul {
             case "MATRIUS":
                 Matriu m = new Matriu(operacio);
                 if (Arrays.deepToString(m.getResultat()).equals("null")) {
-                    System.out.println("Es resta!!");
                     resultatString = "[[0,0][0,0]]";
                 } else {
                     resultatString = Arrays.deepToString(m.getResultat());
                 }
-                System.out.println("????" + Arrays.deepToString(m.getResultat()));
                 break;
             case "OCTAL":
-                //separa(operacio);
-                //resultatString = Integer.toString(calculSimple(numbers, signes));
 
                 ConversorBase conversorBase = new ConversorBase(operacio, tipusCalcul);
                 resultatDecimal = conversorBase.getResultatDecimal();
@@ -103,29 +105,29 @@ public class Calcul {
                 System.out.println("Funcion per defecte");
 
                 if (operacio.contains("sin")) {
-                    String [] split = operacio.split("sin");
+                    String[] split = operacio.split("sin");
                     double number = Integer.parseInt(split[1].replaceAll(" ", ""));
                     double res = Math.sin(number);
                     resultatString = Double.toString(res);
 
                 } else if (operacio.contains("cos")) {
-                    String [] split = operacio.split("cos");
+                    String[] split = operacio.split("cos");
                     double number = Integer.parseInt(split[1].replaceAll(" ", ""));
                     double res = Math.cos(number);
                     resultatString = Double.toString(res);
                 } else if (operacio.contains("log")) {
-                    String [] split = operacio.split("log");
+                    String[] split = operacio.split("log");
                     double number = Integer.parseInt(split[1].replaceAll(" ", ""));
                     double res = Math.log10(number);
                     resultatString = Double.toString(res);
                 } else if (operacio.contains("ln")) {
-                    String [] split = operacio.split("ln");
+                    String[] split = operacio.split("ln");
                     double number = Integer.parseInt(split[1].replaceAll(" ", ""));
                     double res = Math.log(number);
                     resultatString = Double.toString(res);
 
                 } else if (operacio.contains("exp")) {
-                    String [] split = operacio.split("exp");
+                    String[] split = operacio.split("exp");
                     System.out.println(Arrays.toString(split));
 
                     int numInicial = Integer.parseInt(split[0]);
@@ -137,23 +139,20 @@ public class Calcul {
 
                     resultatString = resultatExp;
 
-                    System.out.println(resultatExp);
                 } else if (operacio.contains("!")) {
-                    String [] split = operacio.split("!");
+                    String[] split = operacio.split("!");
                     System.out.println(Arrays.toString(split));
 
                     double factorial = 1;
                     double numeroIntroduit = Double.parseDouble(split[0]);
 
-                    while ( numeroIntroduit != 0) {
+                    while (numeroIntroduit != 0) {
                         factorial = factorial * numeroIntroduit;
                         numeroIntroduit--;
                     }
 
                     resultatString = Double.toString(factorial);
-                }
-
-                else {
+                } else {
                     separa(operacio);
                     resultatString = Integer.toString(calculSimple(numbers, signes));
                 }
@@ -169,11 +168,15 @@ public class Calcul {
         }
     }
 
+    /**
+     * Metode void que ens permet crear el fitxer a on es guardaran totes les operacions que faci l'usuari.
+     * Aquest metode afegira al fitxer cada operació que facem.
+     * @throws Exception
+     */
     public void historial() throws Exception {
         String data;
-        if (tipusCalcul.equals("DECIMAL") || tipusCalcul.equals("OCTAL") || tipusCalcul.equals("HEXADECIMAL") ||tipusCalcul.equals("BINARI")) {
-            System.out.println("Es tipo base!!");
-            data = tipusCalcul + ": " + "Decimal: " + getResultatDecimal() + " Octal: " +getResultatOctal() + " Hexadecimal: " + getResultatHexacimal() + " Binari" + getResultatBinari() + "|";
+        if (tipusCalcul.equals("DECIMAL") || tipusCalcul.equals("OCTAL") || tipusCalcul.equals("HEXADECIMAL") || tipusCalcul.equals("BINARI")) {
+            data = tipusCalcul + ": " + "Decimal: " + getResultatDecimal() + " Octal: " + getResultatOctal() + " Hexadecimal: " + getResultatHexacimal() + " Binari" + getResultatBinari() + "|";
         } else {
             data = getOperacio() + "=" + getResultatString() + "|";
         }
@@ -192,6 +195,11 @@ public class Calcul {
         fw.close();
     }
 
+    /**
+     * Metode separa que ens permetra separar el String que ens passa l'usuari en un array de numeros i una llista de
+     * signes
+     * @param operacio Parametre operacio que ens passa l'usuari
+     */
     public void separa(String operacio) {
         String regEx = "[\\+\\-\\*\\/]";
         String split[] = operacio.split(regEx);
@@ -214,6 +222,13 @@ public class Calcul {
         this.signes = signes;
     }
 
+    /**
+     * Metode calculSimple que ens permet fer calculs basics de sumar, restar, multiplicacio i divisio sense tenir en
+     * compte prioritats ni parentesis
+     * @param numbers Parametre numbers que ens passen una array de numbers creat anteriorment amb el metode separa()
+     * @param signes Parametre signes que ens passen una llista de signes creat anteriorment amb el metode separa()
+     * @return Retornara el resultat total de l'operacio que ha introduit l'usuari
+     */
     public static int calculSimple(int[] numbers, List<String> signes) {
         int resultat = 0;
         int recorrNumbers = 0;
@@ -287,6 +302,11 @@ public class Calcul {
         return resultat;
     }
 
+    /**
+     * Metode que ens permetra aconseguir tots els polinomis que ha introduit l'usuari en el String "Operacio"
+     * @param polinomi Parametre polinomi del String que ens passa l'usuari (operacio)
+     * @return Retorna un array de Polynomials de tots els polinomis que l'usuari ha introduit
+     */
     public Polynomial[] calculPolinomi(String polinomi) {
         String parts[] = polinomi.split("\\|");
         Polynomial[] resultat;
@@ -304,59 +324,65 @@ public class Calcul {
         return resultat;
     }
 
+    /**
+     * Metode getter per aconsguir el resultat que s'ha calculat
+     * @return Retorna el resultat que s'ha d'enssenyar per pantalla
+     */
     public String getResultatString() {
         return resultatString;
     }
 
+    /**
+     * Metode setter per assignar un valor al resultat que posteriorment entregarem a l'usuari com resultat
+     * @param resultatString Parametre del actual resultatString
+     */
     public void setResultatString(String resultatString) {
         this.resultatString = resultatString;
     }
-    /*
-    public String getResultatConversio() {
-        return resultatConversio;
-    }
 
-    public void setResultatConversio(String resultatConversio) {
-        this.resultatConversio = resultatConversio;
-    }
-*/
+
+    /**
+     * Metode getter per aconseguir el l'operacio String que ha introduit l'usuari
+     * @return Retorna l'operació en string que ha introduit l'usuari
+     */
     public String getOperacio() {
         return operacio;
     }
 
-    public void setOperacio(String operacio) {
-        this.operacio = operacio;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en decimal en cas que l'usuari estigui fent operacions ens base 2, 8, 16
+     * @return Retorna l'equivalent del numero intrduit en decimal
+     */
     public int getResultatDecimal() {
         return resultatDecimal;
     }
 
-    public void setResultatDecimal(int resultatDecimal) {
-        this.resultatDecimal = resultatDecimal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en octal en cas que l'usuari estigui fent operacions ens base 2, 8, 16
+     * @return Retorna l'equivalent del numero intrduit en octal
+     */
     public String getResultatOctal() {
         return resultatOctal;
     }
 
-    public void setResultatOctal(String resultatOctal) {
-        this.resultatOctal = resultatOctal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en hexadecimal en cas que l'usuari estigui fent operacions ens base 2, 8, 16
+     * @return Retorna l'equivalent del numero intrduit en hexadecimal
+     */
     public String getResultatHexacimal() {
         return resultatHexacimal;
     }
 
-    public void setResultatHexacimal(String resultatHexacimal) {
-        this.resultatHexacimal = resultatHexacimal;
-    }
 
+    /**
+     * Metode getter per aconseguir el resultat en binari en cas que l'usuari estigui fent operacions ens base 2, 8, 16
+     * @return Retorna l'equivalent del numero intrduit en binari
+     */
     public String getResultatBinari() {
         return resultatBinari;
     }
 
-    public void setResultatBinari(String resultatBinari) {
-        this.resultatBinari = resultatBinari;
-    }
 }
